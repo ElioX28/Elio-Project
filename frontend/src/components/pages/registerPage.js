@@ -4,8 +4,8 @@ import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
-const PRIMARY_COLOR = "#cc5c99";
-const SECONDARY_COLOR = "#0c0c1f";
+const PRIMARY_COLOR = "#82F59E";
+const SECONDARY_COLOR = "#050001";
 const url = "http://localhost:8081/user/signup";
 const Register = () => {
   const [data, setData] = useState({ username: "", email: "", password: "" });
@@ -44,8 +44,8 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post(url, data);
-      // const {accessToken} = res
+      const { data: res } = await axios.post(url, data);
+      const {accessToken} = res
       //store token in localStorage
       navigate("/login");
     } catch (error) {

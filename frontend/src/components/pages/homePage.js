@@ -9,6 +9,7 @@ const HomePage = () => {
         localStorage.removeItem('accessToken')
         return navigate('/')
     }
+    
 
     useEffect(() => {
         setUser(getUserInfo())
@@ -21,26 +22,54 @@ const HomePage = () => {
     return (
         <>
             <div>
-                <h3>
-                    Welcome
-                    <span className='username'> @{username}</span>
-                </h3>
-                <h3>
-                    Your userId in mongo db is
-                    <span className='userId'> {id}</span>
-                </h3>
-                <h3>
-                    Your registered email is
-                    <span className='email'> {email}</span>
-                </h3>
-                <h3>
-                    Your password is
-                    <span className='password'> {password} ( hashed )</span>
+                <h3 class="text-center">
+                    Scheduling and Lines 
+                    
                 </h3>
             </div>
+            <div class="container">
+
+            <div class="row g-3">
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div clas="card">
+                        <button  class="btn-warning" onClick={(e) => handleClick('/lines')}>
+                        <img src="Picture1.png" alt="Commuter Rail" class="card-img-top" onClick={ () => navigate('/lines') }></img>
+                        <div class="card-body">
+                        
+                            <h5 clas="card-title ">Commuter Rail</h5>
+                            
+                            
+                        </div>
+                        </button>
+                        
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                <button    onClick={(e) => handleClick('/lines')}>
+                <img src="Picture2.png" alt="Subway" class="card-img-top"></img>
+                        <div class="card-body">
+                            <h5 clas="card-title">Subway</h5>
+                            
+                            
+                        </div>
+                        </button>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                <button   onClick={(e) => handleClick('/lines')}>
+                <img src="Picture3.png" alt="Bus"   class="card-img-top"></img>
+                        <div class="card-body">
+                            <h5 clas="text-center">Bus</h5>
+                            </div>
+                            </button>
+                </div>
+                
+                </div>
+                </div>
             <button onClick={(e) => handleClick(e)}>
                 Log Out
             </button>
+
+           
         </>
     )
 }
