@@ -10,7 +10,7 @@ const HomePage = () => {
         return navigate('/')
     }
     
-
+//Joes comment
     useEffect(() => {
         setUser(getUserInfo())
     }, [])
