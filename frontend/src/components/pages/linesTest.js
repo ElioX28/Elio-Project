@@ -19,6 +19,7 @@ function Lines() {
     async function fetchData() {
       const result = await axios(
         'https://api-v3.mbta.com/lines?page%5Boffset%5D=7&page%5Blimit%5D=13&sort=sort_order',
+        
       );
       setLines(result.data.data);
       setUser(getUserInfo())

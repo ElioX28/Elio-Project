@@ -6,5 +6,5 @@ router.post('/deleteAll', async (req, res) => {
     const user = await newUserModel.deleteMany();
     return res.json(user)
   })
-
+//Joes comment2
   module.exports = router;
