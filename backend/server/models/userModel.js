@@ -22,6 +22,11 @@ const newUserSchema = new mongoose.Schema(
       type: Date,
       default: Date.now,
     },
+    zipcode: {
+      required: true,
+      type: String,
+      label: "zipcode",
+    }
   },
   { collection: "users" }
 );

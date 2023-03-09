@@ -58,7 +58,7 @@ const HomePage = () => {
                 <button   onClick={(e) => handleClick('/lines')}>
                 <img src="Picture3.png" alt="Bus"   class="card-img-top" onClick={ () => navigate('/lines') }></img>
                         <div class="card-body">
-                            <h5 clas="text-center">Bus</h5>
+                            <h5 clas="text-center">Busses</h5>
                             </div>
                             </button>
                 </div>
