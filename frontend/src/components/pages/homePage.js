@@ -32,8 +32,8 @@ const HomePage = () => {
             <div class="row g-3">
                 <div class="col-12 col-md-6 col-lg-4">
                     <div clas="card">
-                        <button  class="btn-warning" onClick={(e) => handleClick('/lines')}>
-                        <img src="Picture1.png" alt="Commuter Rail" class="card-img-top" onClick={ () => navigate('/lines') }></img>
+                        <button  class="btn-warning" onClick={(e) => handleClick('/cmlines')}>
+                        <img src="Picture1.png" alt="Commuter Rail" class="card-img-top" onClick={ () => navigate('/cmlines') }></img>
                         <div class="card-body">
                         
                             <h5 clas="card-title ">Commuter Rail</h5>
@@ -55,8 +55,8 @@ const HomePage = () => {
                         </button>
                 </div>
                 <div class="col-12 col-md-6 col-lg-4">
-                <button   onClick={(e) => handleClick('/lines')}>
-                <img src="Picture3.png" alt="Bus"   class="card-img-top" onClick={ () => navigate('/lines') }></img>
+                <button   onClick={(e) => handleClick('/buslines')}>
+                <img src="Picture3.png" alt="Bus"   class="card-img-top" onClick={ () => navigate('/buslines') }></img>
                         <div class="card-body">
                             <h5 clas="text-center">Busses</h5>
                             </div>

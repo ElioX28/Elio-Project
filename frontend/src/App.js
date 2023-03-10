@@ -8,6 +8,8 @@ import LandingPage from "./components/pages/landingPage";
 import Alerts from "./components/pages/alertstest";
 import Lines from "./components/pages/cmlines";
 import SubwayLines from "./components/pages/subwaylines";
+import BusLines from "./components/pages/buslines";
+import FerryLines from "./components/pages/ferrylines";
 import HomePage from "./components/pages/homePage";
 import Login from "./components/pages/loginPage";
 import Signup from "./components/pages/registerPage";
@@ -35,10 +37,10 @@ const App = () => {
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/signup" element={<Signup />} />
           <Route exact path="/alerts" element={<Alerts />} />
-          <Route exact path="/lines" element={<Lines />} />
+          <Route exact path="/cmlines" element={<Lines />} />
           <Route exact path="/subwaylines" element={<SubwayLines />} />
-          
-
+          <Route exact path="/buslines" element={<BusLines />} />
+          <Route exact path="/ferrylines" element={<FerryLines />} />
           <Route path="/privateUserProfile" element={<PrivateUserProfile />} />
         </Routes>
       </UserContext.Provider>
