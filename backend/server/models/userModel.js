@@ -22,6 +22,11 @@ const newUserSchema = new mongoose.Schema(
       type: Date,
       default: Date.now,
     },
+    favline: {
+      type: String,
+      required: true,
+      label: "favline",
+    },
     zipcode: {
       required: true,
       type: String,

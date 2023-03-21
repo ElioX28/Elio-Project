@@ -18,7 +18,7 @@ const HomePage = () => {
 
     if (!user) return (
         <div><h4>Log in to view this page.</h4></div>)
-    const { id, email, username, password } = user
+    const { id, email, username, password, favline, zipcode } = user
     return (
         <>
             <div>
