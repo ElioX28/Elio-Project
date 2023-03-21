@@ -32,6 +32,10 @@ function BusLines() {
 
   return (
     <div>
+        <h3 class="text-left-center">
+        Bus Lines 
+        
+    </h3>
       {buslines.map(buslines => (
         <Card
         body

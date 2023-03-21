@@ -32,6 +32,10 @@ function Lines() {
 
   return (
     <div>
+        <h3 class="text-left-center">
+        Commuter Rail Lines 
+        
+    </h3>
       {lines.map(lines => (
         <Card
         body

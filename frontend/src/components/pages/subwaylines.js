@@ -15,6 +15,7 @@ function SubwayLines() {
     return navigate('/')
 }
 
+
   useEffect(() => {
     async function fetchData() {
       const result = await axios(
@@ -31,7 +32,12 @@ function SubwayLines() {
     <div><h4>Log in to view this page.</h4></div>)
 
   return (
-    <div>
+
+    <div>   
+    <h3 class="text-left-center">
+        Subway Lines 
+        
+    </h3>
       {subwaylines.map(subwaylines => (
         <Card
         body

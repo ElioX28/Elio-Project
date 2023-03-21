@@ -23,7 +23,7 @@ const HomePage = () => {
         <>
             <div>
                 <h3 class="text-center">
-                    Scheduling and Lines 
+                    Methods of Transportation
                     
                 </h3>
             </div>

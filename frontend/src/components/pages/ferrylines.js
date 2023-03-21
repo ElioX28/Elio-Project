@@ -32,6 +32,10 @@ function FerryLines() {
 
   return (
     <div>
+        <h3 class="text-center">
+        Ferry Lines 
+        
+    </h3>
       {ferrylines.map(ferrylines => (
         <Card
         body
