@@ -24,11 +24,9 @@ const newUserSchema = new mongoose.Schema(
     },
     favline: {
       type: String,
-      required: true,
       label: "favline",
     },
     zipcode: {
-      required: true,
       type: String,
       label: "zipcode",
     }
