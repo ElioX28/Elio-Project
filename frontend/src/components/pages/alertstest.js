@@ -43,14 +43,7 @@ function Alerts() {
         </div>
       </Card>
       ))}
-
-        <h1>Alerts!</h1>
-      {alerts.map(alert => (  
-        <div key={alert.id}>
-          <h3>{alert.attributes.header}</h3>
-          <p>{alert.attributes.description}</p>
-        </div>
-      ))}
+      
     </div>
   );
 }
