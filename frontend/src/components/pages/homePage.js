@@ -61,6 +61,15 @@ const HomePage = () => {
                             <h5 clas="text-center">Busses</h5>
                             </div>
                             </button>
+                            </div>
+
+                <div class="col-12 col-md-6 col-lg-4">
+                <button   onClick={(e) => handleClick('/buslines')}>
+                <img src="Picture3.png" alt="Bus"   class="card-img-top" onClick={ () => navigate('/ferrylines') }></img>
+                        <div class="card-body">
+                            <h5 clas="text-center">Ferry</h5>
+                            </div>
+                            </button>
                 </div>
                 
                 </div>
