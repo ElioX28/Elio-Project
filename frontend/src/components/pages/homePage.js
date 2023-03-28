@@ -99,7 +99,9 @@ const HomePage = () => {
           
         <Card.Title>Alert</Card.Title>
         <Card.Text>{alert.attributes.header}{alert.attributes.description}</Card.Text>
-         
+        <Card.Title>Time</Card.Title>
+        <Card.Text>{alert.attributes.updated_at}</Card.Text>
+
         </Card.Body>
       </div>
     </Card>
