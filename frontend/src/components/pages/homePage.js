@@ -1,20 +1,29 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import Card from 'react-bootstrap/Card';
+import axios from 'axios';
 import getUserInfo from '../../utilities/decodeJwt'
+
+
 const HomePage = () => {
     const [user, setUser] = useState({})
     const navigate = useNavigate()
+    const [alerts, setAlerts] = useState([]);
     const handleClick = (e) => {
         e.preventDefault();
         localStorage.removeItem('accessToken')
         return navigate('/')
     }
-  //Ryan's Comment  
-//Joes comment
     useEffect(() => {
-        setUser(getUserInfo())
-    }, [])
-
+        async function fetchData() {
+          const result = await axios(
+            'https://api-v3.mbta.com/alerts?page%5Blimit%5D=20&sort=-created_at&filter%5Bactivity%5D=BOARD%2CEXIT%2CRIDE',
+          );
+          setAlerts(result.data.data);
+          setUser(getUserInfo())
+        }
+        fetchData();
+      }, []);
 
     if (!user) return (
         <div><h4>Log in to view this page.</h4></div>)
@@ -71,6 +80,29 @@ const HomePage = () => {
                             </div>
                             </button>
                 </div>
+
+    <div>
+      {alerts.map(alert => (
+        <Card
+        body
+        outline
+        color="success"
+        className="mx-1 my-2"
+        style={{ width: "30rem" }}
+      >
+        <div class="alert alert-info">
+        <Card.Body>
+          
+        <Card.Title>Alert</Card.Title>
+        <Card.Text>{alert.attributes.header}{alert.attributes.description}</Card.Text>
+         
+        </Card.Body>
+        </div>
+      </Card>
+      ))}
+      
+    </div>
+
                 
                 </div>
                 </div>
