@@ -32,7 +32,7 @@ function FerryLines() {
 
   return (
     <div>
-        <h3 class="text-center">
+        <h3 class="text-left-center">
         Ferry Lines 
         
     </h3>
