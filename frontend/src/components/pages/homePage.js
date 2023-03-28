@@ -82,24 +82,28 @@ const HomePage = () => {
                 </div>
 
     <div>
-      {alerts.map(alert => (
-        <Card
-        body
-        outline
-        color="success"
-        className="mx-1 my-2"
-        style={{ width: "30rem" }}
-      >
-        <div class="alert alert-info">
+      
+      
+      
+    <div style={{ height: '200px', overflowY: 'scroll' }}>
+  {alerts.map(alert => (
+    <Card
+      body
+      outline
+      color="success"
+      className="mx-1 my-2"
+      style={{ width: "30rem" }}
+    >
+      <div class="alert alert-info">
         <Card.Body>
-          
-        <Card.Title>Alert</Card.Title>
-        <Card.Text>{alert.attributes.header}{alert.attributes.description}</Card.Text>
-         
+          <Card.Title>Alert</Card.Title>
+          <Card.Text>{alert.attributes.header}{alert.attributes.description}</Card.Text>
         </Card.Body>
-        </div>
-      </Card>
-      ))}
+      </div>
+    </Card>
+  ))}
+</div>
+
       
     </div>
 
