@@ -4,37 +4,48 @@ import Modal from "react-bootstrap/Modal";
 import { useNavigate } from "react-router-dom";
 import getUserInfo from "../../utilities/decodeJwt";
 
-
-//link to service
-//http://localhost:8096/privateUserProfile
-
 const PrivateUserProfile = () => {
   const [show, setShow] = useState(false);
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState({});
+  const [biography, setBiography] = useState("");
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    setUser(getUserInfo());
+  }, []);
 
-  // handle logout button
-  const handleLogout = (async) => {
+  const handleLogout = () => {
     localStorage.clear();
     navigate("/");
   };
 
-  useEffect(() => {
-    setUser(getUserInfo())
-  }, []);
+  const handleSaveBiography = () => {
+    fetch("http://localhost:8096/privateUserProfile", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify({ biography }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(response.statusText);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
-
-  // 	<span><b>{<FollowerCount username = {username}/>}</b></span>&nbsp;
-  // <span><b>{<FollowingCount username = {username}/>}</b></span>;
-  if (!user) return (<div><h4>Log in to view this page.</h4></div>)
+  if (!user) return <div><h4>Log in to view this page.</h4></div>;
   return (
-    <div class="container">
-      <div class="col-md-12 text-center">
+    <div className="container">
+      <div className="col-md-12 text-center">
         <h1>{user && user.username}</h1>
-        <div class="col-md-12 text-center">
+        <div className="col-md-12 text-center">
           <>
             <Button className="me-2" onClick={handleShow}>
               Log Out
@@ -59,6 +70,22 @@ const PrivateUserProfile = () => {
               </Modal.Footer>
             </Modal>
           </>
+        </div>
+        <div className="col-md-12 text-center">
+          <textarea
+            rows="5"
+            className="form-control"
+            placeholder="Enter your biography"
+            value={biography}
+            onChange={(e) => setBiography(e.target.value)}
+          ></textarea>
+          <button
+            type="button"
+            className="btn btn-primary mt-2"
+            onClick={handleSaveBiography}
+          >
+            Save
+          </button>
         </div>
       </div>
     </div>
