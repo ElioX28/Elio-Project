@@ -1,3 +1,5 @@
+// a page that displays names of all MBTA ferry lines and has clickable buttons for each line that leads to thier own page
+
 import React, { useState, useEffect } from 'react';
 import Card from 'react-bootstrap/Card';
 import { useNavigate } from 'react-router-dom'

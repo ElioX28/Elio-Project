@@ -53,7 +53,6 @@ function BusLines() {
       </Card>
       ))}
 
-3
     </div>
   );
 }
