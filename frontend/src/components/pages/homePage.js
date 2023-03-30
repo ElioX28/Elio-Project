@@ -85,7 +85,7 @@ const HomePage = () => {
       
       
       
-    <div style={{ height: '200px', overflowY: 'scroll' }}>
+    <div style={{ height: '900px', overflowY: 'scroll' }}>
   {alerts.map(alert => (
     <Card
       body
