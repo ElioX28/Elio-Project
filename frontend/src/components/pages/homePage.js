@@ -42,10 +42,10 @@ const HomePage = () => {
                 <div class="col-12 col-md-6 col-lg-4">
                     <div clas="card">
                         <button  class="btn-warning" onClick={(e) => handleClick('/cmlines')}>
-                        <img src="Picture1.png" alt="Commuter Rail" class="card-img-top" onClick={ () => navigate('/cmlines') }></img>
+                        <h5 clas="card-title "></h5>
+                        <img src="commuterrailicon.png" alt="Commuter Rail" class="card-img-top" onClick={ () => navigate('/cmlines') }></img>
                         <div class="card-body">
                         
-                            <h5 clas="card-title ">Commuter Rail</h5>
                             
                             
                         </div>
@@ -55,9 +55,9 @@ const HomePage = () => {
                 </div>
                 <div class="col-12 col-md-6 col-lg-4">
                 <button    onClick={(e) => handleClick('/subwaylines')}>
-                <img src="Picture2.png" alt="Subway" class="card-img-top" onClick={ () => navigate('/subwaylines') }></img>
+                <h5 clas="card-title"></h5>
+                <img src="subwayicon.png" alt="Subway" class="card-img-top" onClick={ () => navigate('/subwaylines') }></img>
                         <div class="card-body">
-                            <h5 clas="card-title">Subway</h5>
                             
                             
                         </div>
@@ -65,18 +65,18 @@ const HomePage = () => {
                 </div>
                 <div class="col-12 col-md-6 col-lg-4">
                 <button   onClick={(e) => handleClick('/buslines')}>
-                <img src="Picture3.png" alt="Bus"   class="card-img-top" onClick={ () => navigate('/buslines') }></img>
+                <h5 clas="text-center"></h5>
+                <img src="busicon.png" alt="Bus"   class="card-img-top" onClick={ () => navigate('/buslines') }></img>
                         <div class="card-body">
-                            <h5 clas="text-center">Busses</h5>
                             </div>
                             </button>
                             </div>
 
                 <div class="col-12 col-md-6 col-lg-4">
                 <button   onClick={(e) => handleClick('/ferrylines')}>
-                <img src="ferrypicture.png" alt="Ferry"   class="card-img-top" onClick={ () => navigate('/ferrylines') }></img>
+                <h5 clas="text-center"></h5>
+                <img src="ferryicon.png" alt="Ferry"   class="card-img-top" onClick={ () => navigate('/ferrylines') }></img>
                         <div class="card-body">
-                            <h5 clas="text-center">Ferry</h5>
                             </div>
                             </button>
                 </div>
@@ -96,8 +96,12 @@ const HomePage = () => {
     >
       <div class="alert alert-info">
         <Card.Body>
-          <Card.Title>Alert</Card.Title>
-          <Card.Text>{alert.attributes.header}{alert.attributes.description}</Card.Text>
+          
+        <Card.Title>Alert</Card.Title>
+        <Card.Text>{alert.attributes.header}{alert.attributes.description}</Card.Text>
+        <Card.Title>Time</Card.Title>
+        <Card.Text>{alert.attributes.updated_at}</Card.Text>
+
         </Card.Body>
       </div>
     </Card>
