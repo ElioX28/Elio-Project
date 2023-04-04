@@ -1,5 +1,3 @@
-// a page that displays names of all MBTA ferry lines and has clickable buttons for each line that leads to thier own page
-
 import React, { useState, useEffect } from 'react';
 import Card from 'react-bootstrap/Card';
 import { useNavigate } from 'react-router-dom'
@@ -80,36 +78,35 @@ function FerryLines() {
 
   return (
     <div>
-      <h1>MBTA Ferry Routes</h1>
+    <h1>MBTA Ferry Routes</h1>
 
-      <div style={{ display: 'flex' }}>
-        <div style={{ flex: 1 }}>
-          {ferrylines.map((line) => (
-            <button key={line.id} style={buttonStyle}>
-              {line.attributes.long_name}
-            </button>
-          ))}
-        </div>
+    <div style={{ display: 'flex' }}>
+      <div style={{ flex: 1 }}>
+        {ferrylines.map((line) => (
+          <button key={line.id} style={buttonStyle}>
+            {line.attributes.long_name}
+          </button>
+        ))}
+      </div>
 
-        <div style={{ flex: 1 }}>
-          <div style={alertBoxStyle}>
-            {alerts.length > 0 ? (
-              alerts.map((alert) => (
-                <div key={alert.id} style={alertStyle}>
-                  <Card.Body>
-                    <Card.Title>{alert.attributes.header}</Card.Title>
-                    <Card.Text>{"Time: " + new Date(alert.attributes.updated_at).toLocaleString()}</Card.Text>
-                  </Card.Body>
-                </div>
-              ))
-            ) : (
-              <p>There are no high priority ferry alerts at this time</p>
-            )}
-          </div>
+      <div style={{ flex: 1 }}>
+        <div style={alertBoxStyle}>
+          {alerts.length > 0 ? (
+            alerts.map((alert) => (
+              <div key={alert.id} style={alertStyle}>
+                <Card.Body>
+                  <Card.Title>{alert.attributes.header}</Card.Title>
+                  <Card.Text>{"Time: " + new Date(alert.attributes.updated_at).toLocaleString()}</Card.Text>
+                </Card.Body>
+              </div>
+            ))
+          ) : (
+          <p style={{ fontSize: '1.5em' }}>There are no high priority ferry alerts at this time</p>          )}
         </div>
       </div>
     </div>
-  );
+  </div>
+);
 }
 
 export default FerryLines;
