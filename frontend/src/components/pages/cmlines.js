@@ -8,6 +8,12 @@ function Lines() {
   const [railLines, setRailLines] = useState([]);
   const [alerts, setAlerts] = useState([]);
   const [user, setUser] = useState({});
+  const navigate = useNavigate()
+  const handleClick = (e) => {
+    e.preventDefault();
+    localStorage.removeItem('accessToken')
+    return navigate('/')
+}
 
   useEffect(() => {
     axios
@@ -80,7 +86,8 @@ function Lines() {
       <div style={{ display: 'flex' }}>
         <div style={{ flex: 1 }}>
           {railLines.map((line) => (
-            <button key={line.id} style={buttonStyle}>
+            <button  className = "button" style={buttonStyle} key={line.id}>
+              <img onClick={ () => navigate('/landingpage') }></img>
               {line.attributes.long_name}
             </button>
           ))}

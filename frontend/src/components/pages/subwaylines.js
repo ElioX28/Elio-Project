@@ -5,6 +5,7 @@ import axios from 'axios';
 import getUserInfo from '../../utilities/decodeJwt'
 
 
+
 function SubwayLines() {
   const [subwaylines, setSubwayLines] = useState([]);
   const [alerts, setAlerts] = useState([]);
@@ -32,7 +33,7 @@ function SubwayLines() {
   useEffect(() => {
     async function fetchData() {
       const result = await axios(
-        'https://api-v3.mbta.com/alerts?page%5Blimit%5D=20&sort=-updated_at&filter%5Broute_type%5D=0&filter%5Bactivity%5D=BOARD%2CEXIT%2CRIDE'
+        'https://api-v3.mbta.com/alerts?page%5Blimit%5D=20&sort=-updated_at&filter%5Broute_type%5D=1&filter%5Bactivity%5D=BOARD%2CEXIT%2CRIDE'
       );
       setAlerts(result.data.data);
       setUser(getUserInfo());

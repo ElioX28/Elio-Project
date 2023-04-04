@@ -8,6 +8,8 @@ import getUserInfo from '../../utilities/decodeJwt'
 function BusLines() {
   const [buslines, setBusLines] = useState([]);
   const [user, setUser] = useState({});
+  const [alerts, setAlerts] = useState([]);
+
   const navigate = useNavigate()
   const handleClick = (e) => {
     e.preventDefault();
@@ -27,32 +29,83 @@ function BusLines() {
     fetchData();
   }, []);
 
-  if (!user) return (
-    <div><h4>Log in to view this page.</h4></div>)
+  useEffect(() => {
+    async function fetchData() {
+      const result = await axios(
+        'https://api-v3.mbta.com/alerts?page%5Blimit%5D=20&sort=-updated_at&filter%5Broute_type%5D=3&filter%5Bactivity%5D=BOARD%2CEXIT%2CRIDE');
+      setAlerts(result.data.data);
+      setUser(getUserInfo());
+    }
+    fetchData();
+  }, []);
+
+  const buttonStyle = {
+    display: 'inline-block',
+    height: '100px',
+    width: '300px',
+    padding: '10px',
+    margin: '5px',
+    fontSize: '21px',
+    backgroundColor: 'tan',
+    color: 'white',
+    border: 'none',
+    borderRadius: '5px',
+    cursor: 'pointer',
+  };
+
+  const alertBoxStyle = {
+    display: 'inline-block',
+    height: '600px',
+    width: '650px',
+    padding: '10px',
+    margin: '5px',
+    fontSize: '1em',
+    backgroundColor: '#fff8f2',
+    color: 'black',
+    border: 'white',
+    borderRadius: '5px',
+    overflowY: 'scroll',
+  };
+
+  const alertStyle = {
+    margin: '5px',
+    padding: '10px',
+    fontSize: '20px',
+    backgroundColor: 'lightblue',
+    border: '1px solid darkblue',
+    borderRadius: '5px',
+  }
 
   return (
     <div>
-        <h3 class="text-left-center">
-        Bus Lines 
-        
-    </h3>
-      {buslines.map(buslines => (
-        <Card
-        body
-        outline
-        color="success"
-        className="mx-1 my-2"
-        style={{ width: "30rem" }}
-      >
-        <Card.Body>
-          <button onClick={(e) => handleClick('/buslines')}>
-        <Card.Title>{buslines.attributes.long_name}</Card.Title>
-        <Card.Text>{buslines.attributes.short_name}</Card.Text>
-        </button>
-        </Card.Body>
-      </Card>
-      ))}
+      <h1>MBTA Bus Routes</h1>
 
+      <div style={{ display: 'flex' }}>
+        <div style={{ flex: 1 }}>
+          {buslines.map((line) => (
+            <button key={line.id} style={buttonStyle}>
+              {line.attributes.long_name}
+            </button>
+          ))}
+        </div>
+
+        <div style={{ flex: 1 }}>
+          <div style={alertBoxStyle}>
+            {alerts.length > 0 ? (
+              alerts.map((alert) => (
+                <div key={alert.id} style={alertStyle}>
+                  <Card.Body>
+                    <Card.Title>{alert.attributes.header}</Card.Title>
+                    <Card.Text>{"Time: " + new Date(alert.attributes.updated_at).toLocaleString()}</Card.Text>
+                  </Card.Body>
+                </div>
+              ))
+            ) : (
+              <p>No alerts to display</p>
+            )}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
