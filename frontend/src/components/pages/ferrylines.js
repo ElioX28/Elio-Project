@@ -55,7 +55,7 @@ function FerryLines() {
       </Card>
       ))}
 
-3
+
     </div>
   );
 }
