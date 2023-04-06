@@ -86,8 +86,8 @@ function Lines() {
       <div style={{ display: 'flex' }}>
         <div style={{ flex: 1 }}>
           {railLines.map((line) => (
-            <button  className = "button" style={buttonStyle} key={line.id}>
-              <img onClick={ () => navigate('/landingpage') }></img>
+            <button key={line.id} style={buttonStyle} onClick={ () => navigate('/cmlinesschedule') }>
+            <h5 clas="card-title"></h5>
               {line.attributes.long_name}
             </button>
           ))}
