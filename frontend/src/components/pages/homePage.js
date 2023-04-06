@@ -1,126 +1,112 @@
-import React, { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import axios from 'axios';
-import getUserInfo from '../../utilities/decodeJwt'
-
+import getUserInfo from '../../utilities/decodeJwt';
 
 const HomePage = () => {
-    const [user, setUser] = useState({})
-    const navigate = useNavigate()
-    const [alerts, setAlerts] = useState([]);
-    const handleClick = (e) => {
-        e.preventDefault();
-        localStorage.removeItem('accessToken')
-        return navigate('/')
-    }
-    useEffect(() => {
-        async function fetchData() {
-          const result = await axios(
-            'https://api-v3.mbta.com/alerts?page%5Blimit%5D=20&sort=-created_at&filter%5Bactivity%5D=BOARD%2CEXIT%2CRIDE',
-          );
-          setAlerts(result.data.data);
-          setUser(getUserInfo())
-        }
-        fetchData();
-      }, []);
+  const [user, setUser] = useState({});
+  const navigate = useNavigate();
+  const [alerts, setAlerts] = useState([]);
 
-    if (!user) return (
-        <div><h4>Log in to view this page.</h4></div>)
-    const { id, email, username, password, favline, zipcode } = user
-    return (
-        <>
-            <div>
-                <h3 class="text-center">
-                    Methods of Transportation
-                    
-                </h3>
-            </div>
-            <div class="container">
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios.get('https://api-v3.mbta.com/alerts', {
+        params: {
+          'page[limit]': 20,
+          sort: '-created_at',
+          'filter[activity]': 'BOARD,EXIT,RIDE',
+        },
+      });
+      setAlerts(result.data.data);
+      setUser(getUserInfo());
+    };
+    fetchData();
+  }, []);
 
-            <div class="row g-3">
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div clas="card">
-                        <button  class="btn-warning" onClick={(e) => handleClick('/cmlines')}>
-                        <h5 clas="card-title "></h5>
-                        <img src="commuterrailicon.png" alt="Commuter Rail" class="card-img-top" onClick={ () => navigate('/cmlines') }></img>
-                        <div class="card-body">
-                        
-                            
-                            
-                        </div>
-                        </button>
-                        
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-4">
-                <button    onClick={(e) => handleClick('/subwaylines')}>
-                <h5 clas="card-title"></h5>
-                <img src="subwayicon.png" alt="Subway" class="card-img-top" onClick={ () => navigate('/subwaylines') }></img>
-                        <div class="card-body">
-                            
-                            
-                        </div>
-                        </button>
-                </div>
-                <div class="col-12 col-md-6 col-lg-4">
-                <button   onClick={(e) => handleClick('/buslines')}>
-                <h5 clas="text-center"></h5>
-                <img src="busicon.png" alt="Bus"   class="card-img-top" onClick={ () => navigate('/buslines') }></img>
-                        <div class="card-body">
-                            </div>
-                            </button>
-                            </div>
+  const handleClick = () => {
+    localStorage.removeItem('accessToken');
+    navigate('/');
+  };
 
-                <div class="col-12 col-md-6 col-lg-4">
-                <button   onClick={(e) => handleClick('/ferrylines')}>
-                <h5 clas="text-center"></h5>
-                <img src="ferryicon.png" alt="Ferry"   class="card-img-top" onClick={ () => navigate('/ferrylines') }></img>
-                        <div class="card-body">
-                            </div>
-                            </button>
-                </div>
+  if (!user.id) return <div><h4>Log in to view this page.</h4></div>;
 
-    <div>
-      
-      
-      
-    <div style={{ height: '900px', overflowY: 'scroll' }}>
-  {alerts.map(alert => (
-    <Card
-      body
-      outline
-      color="success"
-      className="mx-1 my-2"
-      style={{ width: "30rem" }}
-    >
-      <div class="alert alert-info">
-        <Card.Body>
-          
-        <Card.Title>Alert</Card.Title>
-        <Card.Text>{alert.attributes.header}{alert.attributes.description}</Card.Text>
-        <Card.Title>Time</Card.Title>
-        <Card.Text>{alert.attributes.updated_at}</Card.Text>
-
-        </Card.Body>
+  return (
+    <>
+      <div>
+        <h3 class="text-center">
+          Methods of Transportation
+        </h3>
       </div>
-    </Card>
-  ))}
-</div>
+      <div class="container">
+        <div class="row g-3 justify-content-start"> {/* Add justify-content-start class to move pictures to left */}
+          {[
+            {
+              name: 'Commuter Rail',
+              imgSrc: 'commuterrailicon.png',
+              onClick: () => navigate('/cmlines'),
+            },
+            {
+              name: 'Subway',
+              imgSrc: 'subwayicon.png',
+              onClick: () => navigate('/subwaylines'),
+            },
+            {
+              name: 'Bus',
+              imgSrc: 'busicon.png',
+              onClick: () => navigate('/buslines'),
+            },
+            {
+              name: 'Ferry',
+              imgSrc: 'ferryicon.png',
+              onClick: () => navigate('/ferrylines'),
+            },
+          ].map((transportation, index) => (
+            <div class="col-12 col-md-6 col-lg-4" key={index}>
+              <div clas="card">
+                <button class="btn-warning" onClick={transportation.onClick}>
+                  <h5 clas="card-title "></h5>
+                  <img src={transportation.imgSrc} alt={transportation.name} class="card-img-top"></img>
+                  <div class="card-body"></div>
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div class="float-end"> {/* Add float-end class to move alerts to right */}
+          <div style={{ height: '900px', overflowY: 'scroll' }}>
+            {alerts.map((alert, index) => (
+              <Card
+                key={index}
+                body
+                outline
+                color="success"
+                className="mx-1 my-2"
+                style={{ width: '30rem' }}
+              >
+                <div class="alert alert-info">
+                  <Card.Body>
+                    <Card.Title>Alert</Card.Title>
+                    <Card.Text>
+                    {alert.attributes.header + alert.attributes.description}
+                    </Card.Text>
+                    <Card.Text>
+                    Time: {new Date(alert.attributes.updated_at).toLocaleString()}
+                    </Card.Text>
 
-      
-    </div>
-
-                
+                  </Card.Body>
                 </div>
-                </div>
-            <button onClick={(e) => handleClick(e)}>
-                Log Out
-            </button>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </div>
+      <button onClick={handleClick}>
+        Log Out
 
-           
-        </>
-    )
-}
+      </button>
+    </>
+  );
+};
 
-export default HomePage
+export default HomePage;
