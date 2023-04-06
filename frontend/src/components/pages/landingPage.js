@@ -1,8 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 const Landingpage = () => {
+  const [darkMode, setDarkMode] = useState(false);
+
+  const handleToggleDarkMode = () => {
+    setDarkMode(!darkMode);
+  };
+
+  const getContainerStyle = () => {
+    return {
+      backgroundColor: darkMode ? '#222' : '#fff',
+      color: darkMode ? '#fff' : '#222',
+    };
+  };
+
+  const getButtonVariant = () => {
+    return darkMode ? 'outline-light' : 'outline-primary';
+  };
+
   return (
     <Container fluid className="d-flex flex-column" style={{ minHeight: '100vh', backgroundImage: 'url("https://upload.wikimedia.org/wikipedia/commons/7/73/MBTA_Green_Line_3907_at_Riverside_station.jpg")', backgroundSize: 'cover',  backgroundPosition: 'center',backgroundColor: 'rgba(255, 255, 255, 0.3)', backgroundBlendMode: 'overlay' }}>
       <Row className="flex-grow-1 align-items-center">
@@ -20,6 +37,11 @@ const Landingpage = () => {
             <Link to="/login">
               <Button variant="success" style={{ textShadow: '1px 1px 10px rgba(255, 255, 255, 0.5)' ,fontSize: '1.5rem',   fontFamily: '"Playfair Display", serif', fontWeight: 'bold' }}>Login</Button>
             </Link>
+          </div>
+          <div className="text-end mt-3">
+            <Button variant={getButtonVariant()} onClick={handleToggleDarkMode}>
+              {darkMode ? 'Light Mode' : 'Dark Mode'}
+            </Button>
           </div>
         </Col>
       </Row>
