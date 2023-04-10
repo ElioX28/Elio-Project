@@ -77,9 +77,28 @@ const Register = () => {
                     onChange={handleChange}
                     placeholder="Enter username"
                   />
-                  <Form.Text className="text-muted">
-                    We just might sell your data
-                  </Form.Text>
+
+                  
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                  <Form.Label style={labelStyling}>First Name</Form.Label>
+                  <Form.Control
+                    type="firstname"
+                    name="firstname"
+                    onChange={handleChange}
+                    placeholder="First Name"
+                  />
+
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                  <Form.Label style={labelStyling}>Last Name</Form.Label>
+                  <Form.Control
+                    type="lastname"
+                    name="lastname"
+                    onChange={handleChange}
+                    placeholder="Last Name"
+                  />
+
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                   <Form.Label style={labelStyling}>Email</Form.Label>
@@ -89,9 +108,7 @@ const Register = () => {
                     onChange={handleChange}
                     placeholder="Enter Email Please"
                   />
-                  <Form.Text className="text-muted">
-                    We just might sell your data
-                  </Form.Text>
+
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                   <Form.Label style={labelStyling}>Password</Form.Label>
@@ -101,6 +118,18 @@ const Register = () => {
                     placeholder="Password"
                     onChange={handleChange}
                   />
+                                  </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicPassword">
+                  <Form.Label style={labelStyling}>Zip Code</Form.Label>
+                  <Form.Control
+                    type="zipcode"
+                    name="zipcode"
+                    placeholder="Zip Code"
+                    pattern="[0-9]{5}"  // pattern to validate 5-digit zip codes
+                    title="Please enter a valid 5-digit zip code"
+                    onChange={handleChange}
+                  />
+                       
                 </Form.Group>
                 <div class="form-check form-switch">
                   <input

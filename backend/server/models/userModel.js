@@ -8,6 +8,16 @@ const newUserSchema = new mongoose.Schema(
       required: true,
       label: "username",
     },
+    firstname: {
+      type: String,
+      //required: true,
+      label: "firstname",
+    },
+    lastname: {
+      type: String,
+      //required: true,
+      label: "lastname",
+    },
     email: {
       type: String,
       required: true,
@@ -29,6 +39,8 @@ const newUserSchema = new mongoose.Schema(
     zipcode: {
       type: String,
       label: "zipcode",
+      //required: true,
+
     }
   },
   { collection: "users" }
