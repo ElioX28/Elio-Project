@@ -21,6 +21,7 @@ export default function Navbar() {
           <Nav.Link href="/subwaylines" style={{ fontSize: "17px" }}>Subway</Nav.Link>
           <Nav.Link href="/buslines" style={{ fontSize: "17px" }}>Bus</Nav.Link>
           <Nav.Link href="/ferrylines" style={{ fontSize: "17px" }}>Ferry</Nav.Link>
+          <Nav.Link href="/map" style={{ fontSize: "22px" }}>Map</Nav.Link>
           <Nav.Link href="/privateUserProfile" style={{ fontSize: "22px" }}>Profile</Nav.Link>
           <Nav.Link href="/addComment">Leave a Comment</Nav.Link>
         </Nav>
