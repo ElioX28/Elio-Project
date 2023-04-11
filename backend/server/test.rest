@@ -50,3 +50,13 @@ Content-Type: application/json
 
 ###
 POST  http://localhost:8081/user/deleteAll
+
+###
+POST http://localhost:8081/comment/add
+Content-Type: application/json 
+
+{
+    "username" : "max",
+    "stationName" : "Rockport",
+    "comment" : "bunch of tourists"
+}

@@ -14,6 +14,7 @@ import HomePage from "./components/pages/homePage";
 import Login from "./components/pages/loginPage";
 import Signup from "./components/pages/registerPage";
 import PrivateUserProfile from "./components/pages/privateUserProfilePage";
+import AddCommentPage from "./components/pages/addCommentPage";
 import Map from "./components/pages/map";
 import { createContext, useState, useEffect } from "react";
 import getUserInfo from "./utilities/decodeJwt";
@@ -43,8 +44,8 @@ const App = () => {
           <Route exact path="/buslines" element={<BusLines />} />
           <Route exact path="/ferrylines" element={<FerryLines />} />
           <Route path="/privateUserProfile" element={<PrivateUserProfile />} />
-          <Route path="/map" element={<Map/>} />
-
+          <Route path="/addComment" element={<AddCommentPage />} />
+          <Route path="/map" element={<Map />} />    
         </Routes>
       </UserContext.Provider>
     </>
