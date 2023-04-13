@@ -10,7 +10,7 @@ router.post('/signup', async (req, res) => {
     console.log(error)
     if (error) return res.status(400).send({ message: error.errors[0].message });
 
-    const { username, email, password, favline, zipcode } = req.body
+    const { username, firstname, lastname, email, password, favline, zipcode } = req.body
 
     //check if email already exists
     const user = await newUserModel.findOne({ username: username })
@@ -26,6 +26,8 @@ router.post('/signup', async (req, res) => {
     //creates a new user
     const createUser = new newUserModel({
         username: username,
+        firstname: firstname,
+        lastname: lastname,
         email: email,
         password: hashPassword,
         favline : favline,
