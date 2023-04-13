@@ -1,18 +1,20 @@
-// react hello world 
-
 import React, { useState, useEffect } from 'react';
 import Card from 'react-bootstrap/Card';
-import { useNavigate } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import getUserInfo from '../../utilities/decodeJwt'
 
 
-function cmlinesschedule() {
-    return (
-        <div>
-            <h1>hello world</h1>
-        </div>
-    )
+
+function Cmlinesschedule() {
+  const { id } = useParams();
+
+  return (
+    <div>
+      <h1>{id} Schedule</h1>
+      <p>This is the schedule for {id}</p>
+    </div>
+  );
 }
 
-export default cmlinesschedule;
+export default Cmlinesschedule;
