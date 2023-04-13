@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import Card from 'react-bootstrap/Card';
-import { useNavigate } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import getUserInfo from '../../utilities/decodeJwt'
+
+
 
 function Lines() {
   const [railLines, setRailLines] = useState([]);
   const [alerts, setAlerts] = useState([]);
   const [user, setUser] = useState({});
+  const params = useParams();
   const navigate = useNavigate()
   const handleClick = (e) => {
     e.preventDefault();
@@ -15,6 +18,7 @@ function Lines() {
     return navigate('/')
 }
 
+ 
   useEffect(() => {
     axios
       .get('https://api-v3.mbta.com/routes', {
@@ -86,7 +90,7 @@ function Lines() {
       <div style={{ display: 'flex' }}>
         <div style={{ flex: 1 }}>
           {railLines.map((line) => (
-            <button key={line.id} style={buttonStyle} onClick={ () => navigate('/cmlines/') }>
+            <button key={line.id} style={buttonStyle} onClick={ () => navigate(`/cmlines/${line.attributes.long_name}`) }>
             <h5 clas="card-title"></h5>
               {line.attributes.long_name}
             </button>
