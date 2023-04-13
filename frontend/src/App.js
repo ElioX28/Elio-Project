@@ -18,6 +18,8 @@ import AddCommentPage from "./components/pages/addCommentPage";
 import Map from "./components/pages/map";
 import { createContext, useState, useEffect } from "react";
 import getUserInfo from "./utilities/decodeJwt";
+import Cmlinesschedule from "./components/pages/cmlinesschedule";
+
 
 export const UserContext = createContext();
 //test change
@@ -40,6 +42,7 @@ const App = () => {
           <Route exact path="/signup" element={<Signup />} />
           <Route exact path="/alerts" element={<Alerts />} />
           <Route exact path="/cmlines" element={<Lines />} />
+          <Route exact path="/cmlines/:id" element={<Cmlinesschedule />} />
           <Route exact path="/subwaylines" element={<SubwayLines />} />
           <Route exact path="/buslines" element={<BusLines />} />
           <Route exact path="/ferrylines" element={<FerryLines />} />

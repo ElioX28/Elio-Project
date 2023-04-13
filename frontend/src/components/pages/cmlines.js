@@ -35,7 +35,7 @@ function Lines() {
   useEffect(() => {
     async function fetchData() {
       const result = await axios(
-        'https://api-v3.mbta.com/alerts?page%5Blimit%5D=20&sort=-updated_at&filter%5Broute_type%5D=2&filter%5Bactivity%5D=BOARD%2CEXIT%2CRIDE'      );
+        'https://api-v3.mbta.com/alerts?page%5Blimit%5D=20&sort=-updated_at&filter%5Broute_type%5D=2&filter%5Bactivity%5D=BOARD%2CEXIT%2CRIDE');
       setAlerts(result.data.data);
       setUser(getUserInfo());
     }
@@ -86,7 +86,7 @@ function Lines() {
       <div style={{ display: 'flex' }}>
         <div style={{ flex: 1 }}>
           {railLines.map((line) => (
-            <button key={line.id} style={buttonStyle} onClick={ () => navigate('/cmlinesschedule') }>
+            <button key={line.id} style={buttonStyle} onClick={ () => navigate('/cmlines/') }>
             <h5 clas="card-title"></h5>
               {line.attributes.long_name}
             </button>
