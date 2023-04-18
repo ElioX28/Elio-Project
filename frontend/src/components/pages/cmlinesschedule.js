@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import Card from 'react-bootstrap/Card';
 import axios from 'axios';
+import { useParams, useNavigate } from 'react-router-dom'
 
 function CommuterRailSchedule() {
   const [scheduleData, setScheduleData] = useState([]);
+  const { id , ferry , subway, bus } = useParams();
 
   useEffect(() => {
     async function fetchSchedule() {
       try {
-        const response = await axios.get('https://api-v3.mbta.com/schedules?filter[route]=CR-Fairmount');
+        const response = await axios.get(`https://api-v3.mbta.com/schedules?filter[route]=${id}`);
         setScheduleData(response.data.data);
       } catch (error) {
         console.error(error);
@@ -16,7 +18,7 @@ function CommuterRailSchedule() {
     }
 
     fetchSchedule();
-  }, []);
+  }, [id]);
 
   const convertToEST = (timeString) => {
     const date = new Date(timeString);
@@ -35,7 +37,7 @@ function CommuterRailSchedule() {
 
   return (
     <div style={{backgroundColor: '#5B4EB9', color: 'white'}}>
-      <h1>Fairmount Commuter Rail</h1>
+      <h1>{id}{ferry}{subway}{bus} Schedule</h1>
       {scheduleData.map(schedule => (
   <Card key={schedule.id} style={{backgroundColor: '#2C2B50', color: 'white'}}>
     <Card.Body>
