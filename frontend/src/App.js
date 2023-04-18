@@ -46,6 +46,9 @@ const App = () => {
           <Route exact path="/subwaylines" element={<SubwayLines />} />
           <Route exact path="/buslines" element={<BusLines />} />
           <Route exact path="/ferrylines" element={<FerryLines />} />
+          <Route exact path="/subwaylines/:subway" element={<Cmlinesschedule  />} />
+          <Route exact path="/buslines/:bus" element={<Cmlinesschedule  />} />
+          <Route exact path="/ferrylines/:ferry" element={<Cmlinesschedule  />} />
           <Route path="/privateUserProfile" element={<PrivateUserProfile />} />
           <Route path="/addComment" element={<AddCommentPage />} />
           <Route path="/map" element={<Map />} />    
