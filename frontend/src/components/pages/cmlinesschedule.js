@@ -5,12 +5,12 @@ import { useParams, useNavigate } from 'react-router-dom'
 
 function CommuterRailSchedule() {
   const [scheduleData, setScheduleData] = useState([]);
-  const { id , ferry , subway, bus } = useParams();
+  const { id } = useParams();
 
   useEffect(() => {
     async function fetchSchedule() {
       try {
-        const response = await axios.get(`https://api-v3.mbta.com/schedules?filter[route]=${id}`);
+        const response = await axios.get(`https://api-v3.mbta.com/schedules?filter[route]${id ? `=${id}` : ''}`);
         setScheduleData(response.data.data);
       } catch (error) {
         console.error(error);
@@ -26,22 +26,22 @@ function CommuterRailSchedule() {
     return date.toLocaleString('en-US', options);
   }
 
-  const getTrainName = (schedule) => {
-    const pattern = /^CR-(\w+)/;
-    const match = schedule.relationships.route.data.id.match(pattern);
+  const getStationName = (schedule) => {
+    const pattern = /^place-(\w+)/;
+    const match = schedule.relationships.stop.data.id.match(pattern);
     if (match && match.length > 1) {
       return match[1];
     }
-    return schedule.relationships.route.data.id;
+    return schedule.relationships.stop.data.id;
   }
 
   return (
     <div style={{backgroundColor: '#5B4EB9', color: 'white'}}>
-      <h1>{id}{ferry}{subway}{bus} Schedule</h1>
+      <h1>{id} Line Schedule</h1>
       {scheduleData.map(schedule => (
   <Card key={schedule.id} style={{backgroundColor: '#2C2B50', color: 'white'}}>
     <Card.Body>
-      <Card.Title>{getTrainName(schedule)}</Card.Title>
+      <Card.Title>{getStationName(schedule)}</Card.Title>
       <Card.Text>
         <p>Arrival Time: {convertToEST(schedule.attributes.arrival_time)}</p>
       </Card.Text>

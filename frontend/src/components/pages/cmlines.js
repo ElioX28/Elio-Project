@@ -91,7 +91,7 @@ function Lines() {
         <div style={{ flex: 1 }}>
           {railLines.map((line) => ( 
              
-            <button key={line.id} style={buttonStyle} onClick={ () => navigate(`/cmlines/${line.attributes.long_name.replace(/\//g, "%2F")}`) }>
+            <button key={line.id} style={buttonStyle} onClick={ () => navigate(`/cmlines/${line.id}`) }>
             <h5 clas="card-title"></h5>
               {line.attributes.long_name}
             </button>
