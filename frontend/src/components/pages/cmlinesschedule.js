@@ -37,16 +37,15 @@ function CommuterRailSchedule() {
     <div style={{backgroundColor: '#5B4EB9', color: 'white'}}>
       <h1>Fairmount Commuter Rail</h1>
       {scheduleData.map(schedule => (
-        <Card key={schedule.id} style={{backgroundColor: '#2C2B50', color: 'white'}}>
-          <Card.Body>
-            <Card.Title>{getTrainName(schedule)}</Card.Title>
-            <Card.Text>
-              <p>Departure Time: {convertToEST(schedule.attributes.departure_time)}</p>
-              <p>Arrival Time: {convertToEST(schedule.attributes.arrival_time)}</p>
-            </Card.Text>
-          </Card.Body>
-        </Card>
-      ))}
+  <Card key={schedule.id} style={{backgroundColor: '#2C2B50', color: 'white'}}>
+    <Card.Body>
+      <Card.Title>{getTrainName(schedule)}</Card.Title>
+      <Card.Text>
+        <p>Arrival Time: {convertToEST(schedule.attributes.arrival_time)}</p>
+      </Card.Text>
+    </Card.Body>
+  </Card>
+))}
     </div>
   );
 }
