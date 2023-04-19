@@ -5,6 +5,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 
 function CommuterRailSchedule() {
   const [scheduleData, setScheduleData] = useState([]);
+  const [stopData, setStopData] = useState([]);
   const { id } = useParams();
 
   useEffect(() => {
@@ -17,7 +18,17 @@ function CommuterRailSchedule() {
       }      
     }
 
+    async function fetchStops() {
+      try {
+        const response = await axios.get('https://api-v3.mbta.com/stops');
+        setStopData(response.data.data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
     fetchSchedule();
+    fetchStops();
   }, [id]);
 
   const convertToEST = (timeString) => {
@@ -27,12 +38,9 @@ function CommuterRailSchedule() {
   }
 
   const getStationName = (schedule) => {
-    const pattern = /^place-(\w+)/;
-    const match = schedule.relationships.stop.data.id.match(pattern);
-    if (match && match.length > 1) {
-      return match[1];
-    }
-    return schedule.relationships.stop.data.id;
+    const stopId = schedule.relationships.stop.data.id;
+    const stop = stopData.find(stop => stop.id === stopId);
+    return stop?.attributes?.name || stopId;
   }
 
   const now = new Date().getTime();
@@ -64,6 +72,5 @@ function CommuterRailSchedule() {
     </div>
   );
 }
-
 
 export default CommuterRailSchedule;
