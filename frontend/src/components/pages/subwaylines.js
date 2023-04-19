@@ -24,12 +24,12 @@ useEffect(() => {
     .get('https://api-v3.mbta.com/routes', {
       params: {
         filter: {
-          type: 0,
+          type: [0,1],
         },
       },
     })
     .then((response) => {
-      setSubwayLines(response.data.data);
+      setSubwayLines(response.data.data.slice(0, 8));
     })
     .catch((error) => {
       console.log(error);
