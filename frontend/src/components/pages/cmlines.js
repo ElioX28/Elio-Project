@@ -24,7 +24,7 @@ function Lines() {
       .get('https://api-v3.mbta.com/routes', {
         params: {
           filter: {
-            type: 2, // type 2 represents commuter rail routes
+            type: 2, 
           },
         },
       })

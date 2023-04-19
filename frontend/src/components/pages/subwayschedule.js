@@ -35,21 +35,36 @@ function Subwayschedule() {
     return schedule.relationships.stop.data.id;
   }
 
+  const now = new Date().getTime();
+  const next20Arrivals = scheduleData
+    .filter(schedule => {
+      const arrivalTime = new Date(schedule.attributes.arrival_time).getTime();
+      return arrivalTime > now;
+    })
+    .sort((a, b) => {
+      const arrivalTimeA = new Date(a.attributes.arrival_time).getTime();
+      const arrivalTimeB = new Date(b.attributes.arrival_time).getTime();
+      return arrivalTimeA - arrivalTimeB;
+    })
+    .slice(0, 50);
+
   return (
     <div style={{backgroundColor: '#5B4EB9', color: 'white'}}>
       <h1>{subway} Line Schedule</h1>
-      {scheduleData.map(schedule => (
-  <Card key={schedule.id} style={{backgroundColor: '#2C2B50', color: 'white'}}>
-    <Card.Body>
-      <Card.Title>{getStationName(schedule)}</Card.Title>
-      <Card.Text>
-        <p>Arrival Time: {convertToEST(schedule.attributes.arrival_time)}</p>
-      </Card.Text>
-    </Card.Body>
-  </Card>
-))}
+      {next20Arrivals.map(schedule => (
+        <Card key={schedule.id} style={{backgroundColor: '#2C2B50', color: 'white'}}>
+          <Card.Body>
+            <Card.Title>{getStationName(schedule)}</Card.Title>
+            <Card.Text>
+              <p>Arrival Time: {convertToEST(schedule.attributes.arrival_time)}</p>
+            </Card.Text>
+          </Card.Body>
+        </Card>
+      ))}
     </div>
   );
 }
 
 export default Subwayschedule;
+
+

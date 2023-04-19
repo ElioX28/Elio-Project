@@ -19,17 +19,23 @@ function SubwayLines() {
 }
 
 
-  useEffect(() => {
-    async function fetchData() {
-      const result = await axios(
-        'https://api-v3.mbta.com/lines?page%5Blimit%5D=5&sort=sort_order',
-        
-      );
-      setSubwayLines(result.data.data);
-      setUser(getUserInfo())
-    }
-    fetchData();
-  }, []);
+useEffect(() => {
+  axios
+    .get('https://api-v3.mbta.com/routes', {
+      params: {
+        filter: {
+          type: 0,
+        },
+      },
+    })
+    .then((response) => {
+      setSubwayLines(response.data.data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}, []);
+
 
   useEffect(() => {
     async function fetchData() {

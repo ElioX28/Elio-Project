@@ -17,17 +17,23 @@ function FerryLines() {
     return navigate('/')
 }
 
-  useEffect(() => {
-    async function fetchData() {
-      const result = await axios(
-        'https://api-v3.mbta.com/lines?page%5Boffset%5D=20&page%5Blimit%5D=3&sort=sort_order',
-        
-      );
-      setFerryLines(result.data.data);
-      setUser(getUserInfo())
-    }
-    fetchData();
-  }, []);
+useEffect(() => {
+  axios
+    .get('https://api-v3.mbta.com/routes', {
+      params: {
+        filter: {
+          type: 4, // type 0 represents subway routes
+
+        },
+      },
+    })
+    .then((response) => {
+      setFerryLines(response.data.data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}, []);
 
   useEffect(() => {
     async function fetchData() {
