@@ -83,7 +83,7 @@ function BusLines() {
       <div style={{ display: 'flex' }}>
         <div style={{ flex: 1 }}>
           {buslines.map((line) => (
-            <button key={line.id} style={buttonStyle} onClick={ () => navigate(`/cmlines/${line.id}`) }>
+            <button key={line.id} style={buttonStyle} onClick={ () => navigate(`/buslines/${line.id}`) }>
               {line.attributes.long_name}
             </button>
           ))}

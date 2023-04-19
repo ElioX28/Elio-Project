@@ -86,7 +86,7 @@ function SubwayLines() {
       <div style={{ display: 'flex' }}>
         <div style={{ flex: 1 }}>
           {subwaylines.map((line) => (
-            <button key={line.id} style={buttonStyle} onClick={ () => navigate(`/cmlines/${line.id}`) }>
+            <button key={line.id} style={buttonStyle} onClick={ () => navigate(`/subwaylines/${line.id}`) }>
               {line.attributes.long_name}
             </button>
           ))}

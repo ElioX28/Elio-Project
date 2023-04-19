@@ -19,6 +19,10 @@ import Map from "./components/pages/map";
 import { createContext, useState, useEffect } from "react";
 import getUserInfo from "./utilities/decodeJwt";
 import Cmlinesschedule from "./components/pages/cmlinesschedule";
+import Ferryschedule from "./components/pages/ferryschedule";
+import Busschedule from "./components/pages/busschedule";
+import Subwayschedule from "./components/pages/subwayschedule";
+
 
 
 export const UserContext = createContext();
@@ -46,9 +50,9 @@ const App = () => {
           <Route exact path="/subwaylines" element={<SubwayLines />} />
           <Route exact path="/buslines" element={<BusLines />} />
           <Route exact path="/ferrylines" element={<FerryLines />} />
-          <Route exact path="/subwaylines/:subway" element={<Cmlinesschedule  />} />
-          <Route exact path="/buslines/:bus" element={<Cmlinesschedule  />} />
-          <Route exact path="/ferrylines/:ferry" element={<Cmlinesschedule  />} />
+          <Route exact path="/subwaylines/:subway" element={<Subwayschedule  />} />
+          <Route exact path="/buslines/:bus" element={<Busschedule  />} />
+          <Route exact path="/ferrylines/:ferry" element={<Ferryschedule  />} />
           <Route path="/privateUserProfile" element={<PrivateUserProfile />} />
           <Route path="/addComment" element={<AddCommentPage />} />
           <Route path="/map" element={<Map />} />    
