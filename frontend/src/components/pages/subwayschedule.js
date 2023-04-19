@@ -7,11 +7,12 @@ function Subwayschedule() {
   const [scheduleData, setScheduleData] = useState([]);
   const [stopData, setStopData] = useState([]);
   const { subway } = useParams();
+  const [direction, setDirection] = useState('inbound'); // default to inbound
 
   useEffect(() => {
     async function fetchSchedule() {
       try {
-        const response = await axios.get(`https://api-v3.mbta.com/schedules?filter[route]${subway ? `=${subway}` : ''}`);
+        const response = await axios.get(`https://api-v3.mbta.com/schedules?filter[route]${subway ? `=${subway}` : ''}&filter[direction_id]=${direction === 'inbound' ? 0 : 1}`);
         setScheduleData(response.data.data);
       } catch (error) {
         console.error(error);
@@ -29,7 +30,7 @@ function Subwayschedule() {
 
     fetchSchedule();
     fetchStops();
-  }, [subway]);
+  }, [subway, direction]);
 
   const convertToEST = (timeString) => {
     const date = new Date(timeString);
@@ -59,6 +60,13 @@ function Subwayschedule() {
   return (
     <div style={{backgroundColor: '#5B4EB9', color: 'white'}}>
       <h1>{subway} Line Schedule</h1>
+      <div style={{marginBottom: '20px'}}>
+        <span style={{marginRight: '10px'}}>Direction:</span>
+        <select value={direction} onChange={(e) => setDirection(e.target.value)}>
+          <option value="inbound">Inbound</option>
+          <option value="outbound">Outbound</option>
+        </select>
+      </div>
       {next20Arrivals.map(schedule => (
         <Card key={schedule.id} style={{backgroundColor: '#2C2B50', color: 'white'}}>
           <Card.Body>
@@ -74,3 +82,4 @@ function Subwayschedule() {
 }
 
 export default Subwayschedule;
+
