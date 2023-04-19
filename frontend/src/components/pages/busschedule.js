@@ -36,7 +36,7 @@ function Busschedule() {
   }
 
   const now = new Date().getTime();
-  const next20Arrivals = scheduleData
+  const arrivals = scheduleData
     .filter(schedule => {
       const arrivalTime = new Date(schedule.attributes.arrival_time).getTime();
       return arrivalTime > now;
@@ -51,7 +51,7 @@ function Busschedule() {
   return (
     <div style={{backgroundColor: '#5B4EB9', color: 'white'}}>
       <h1>{bus} Line Schedule</h1>
-      {next20Arrivals.map(schedule => (
+      {arrivals.map(schedule => (
         <Card key={schedule.id} style={{backgroundColor: '#2C2B50', color: 'white'}}>
           <Card.Body>
             <Card.Title>{getStationName(schedule)}</Card.Title>

@@ -7,11 +7,12 @@ function CommuterRailSchedule() {
   const [scheduleData, setScheduleData] = useState([]);
   const [stopData, setStopData] = useState([]);
   const { id } = useParams();
+  const [direction, setDirection] = useState('inbound'); // default to inbound
 
   useEffect(() => {
     async function fetchSchedule() {
       try {
-        const response = await axios.get(`https://api-v3.mbta.com/schedules?filter[route]${id ? `=${id}` : ''}`);
+        const response = await axios.get(`https://api-v3.mbta.com/schedules?filter[route]${id ? `=${id}` : ''}&filter[direction_id]=${direction === 'inbound' ? 0 : 1}`);
         setScheduleData(response.data.data);
       } catch (error) {
         console.error(error);
@@ -29,7 +30,7 @@ function CommuterRailSchedule() {
 
     fetchSchedule();
     fetchStops();
-  }, [id]);
+  }, [id, direction]);
 
   const convertToEST = (timeString) => {
     const date = new Date(timeString);
@@ -44,7 +45,7 @@ function CommuterRailSchedule() {
   }
 
   const now = new Date().getTime();
-  const next20Arrivals = scheduleData
+  const arrivals = scheduleData
     .filter(schedule => {
       const arrivalTime = new Date(schedule.attributes.arrival_time).getTime();
       return arrivalTime > now;
@@ -58,8 +59,15 @@ function CommuterRailSchedule() {
 
   return (
     <div style={{backgroundColor: '#5B4EB9', color: 'white'}}>
-      <h1>{id} Line Schedule</h1>
-      {next20Arrivals.map(schedule => (
+    <h1>{id.substring(3)} Line Schedule</h1>
+      <div style={{marginBottom: '20px'}}>
+        <span style={{marginRight: '10px'}}>Direction:</span>
+        <select value={direction} onChange={(e) => setDirection(e.target.value)}>
+          <option value="inbound">Inbound</option>
+          <option value="outbound">Outbound</option>
+        </select>
+      </div>
+      {arrivals.map(schedule => (
         <Card key={schedule.id} style={{backgroundColor: '#2C2B50', color: 'white'}}>
           <Card.Body>
             <Card.Title>{getStationName(schedule)}</Card.Title>

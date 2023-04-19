@@ -45,7 +45,7 @@ function Subwayschedule() {
   }
 
   const now = new Date().getTime();
-  const next20Arrivals = scheduleData
+  const arrivals = scheduleData
     .filter(schedule => {
       const arrivalTime = new Date(schedule.attributes.arrival_time).getTime();
       return arrivalTime > now;
@@ -57,28 +57,29 @@ function Subwayschedule() {
     })
     .slice(0, 50);
 
-  return (
-    <div style={{backgroundColor: '#5B4EB9', color: 'white'}}>
-      <h1>{subway} Line Schedule</h1>
-      <div style={{marginBottom: '20px'}}>
-        <span style={{marginRight: '10px'}}>Direction:</span>
-        <select value={direction} onChange={(e) => setDirection(e.target.value)}>
-          <option value="inbound">Inbound</option>
-          <option value="outbound">Outbound</option>
-        </select>
+    return (
+      <div style={{backgroundColor: '#5B4EB9', color: 'white', height: '1500px', overflowY: 'scroll'}}>
+        <h1>{subway} Line Schedule</h1>
+        <div style={{marginBottom: '20px'}}>
+          <span style={{marginRight: '10px'}}>Direction:</span>
+          <select value={direction} onChange={(e) => setDirection(e.target.value)}>
+            <option value="inbound">Inbound</option>
+            <option value="outbound">Outbound</option>
+          </select>
+        </div>
+        {arrivals.map(schedule => (
+          <Card key={schedule.id} style={{backgroundColor: '#2C2B50', color: 'white'}}>
+            <Card.Body>
+              <Card.Title>{getStationName(schedule)}</Card.Title>
+              <Card.Text>
+                <p>Arrival Time: {convertToEST(schedule.attributes.arrival_time)}</p>
+              </Card.Text>
+            </Card.Body>
+          </Card>
+        ))}
       </div>
-      {next20Arrivals.map(schedule => (
-        <Card key={schedule.id} style={{backgroundColor: '#2C2B50', color: 'white'}}>
-          <Card.Body>
-            <Card.Title>{getStationName(schedule)}</Card.Title>
-            <Card.Text>
-              <p>Arrival Time: {convertToEST(schedule.attributes.arrival_time)}</p>
-            </Card.Text>
-          </Card.Body>
-        </Card>
-      ))}
-    </div>
-  );
+    );
+    
 }
 
 export default Subwayschedule;

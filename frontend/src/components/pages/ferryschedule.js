@@ -36,7 +36,7 @@ function Ferryschedule() {
   }
 
   const now = new Date().getTime();
-  const next20Arrivals = scheduleData
+  const arrivals = scheduleData
     .filter(schedule => {
       const arrivalTime = new Date(schedule.attributes.arrival_time).getTime();
       return arrivalTime > now;
@@ -50,11 +50,11 @@ function Ferryschedule() {
 
   return (
     <div style={{backgroundColor: '#5B4EB9', color: 'white'}}>
-      <h1>{ferry} Line Schedule</h1>
-      {next20Arrivals.map(schedule => (
+    <h1>{ferry.substring(5)} Line Schedule</h1>
+      {arrivals.map(schedule => (
         <Card key={schedule.id} style={{backgroundColor: '#2C2B50', color: 'white'}}>
           <Card.Body>
-            <Card.Title>{getStationName(schedule)}</Card.Title>
+            <Card.Title>{getStationName(schedule).substring(5)}</Card.Title>
             <Card.Text>
               <p>Arrival Time: {convertToEST(schedule.attributes.arrival_time)}</p>
             </Card.Text>
