@@ -48,7 +48,7 @@ useEffect(() => {
 
   const buttonStyle = {
     display: 'inline-block',
-    height: '200px',
+    height: '175px',
     width: '400px',
     padding: '10px',
     margin: '5px',

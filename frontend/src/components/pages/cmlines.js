@@ -52,7 +52,7 @@ function Lines() {
     width: '400px',
     padding: '10px',
     margin: '5px',
-    fontSize: '25px',
+    fontSize: '28px',
     backgroundColor: '#84246c',
     color: 'white',
     border: 'none',

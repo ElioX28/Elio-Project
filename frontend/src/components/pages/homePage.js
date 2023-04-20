@@ -34,11 +34,11 @@ const HomePage = () => {
   return (
     <>
       <div className="container">
-        <h3 className="text-center my-5">Methods of Transportation</h3>
+      <h3 className="text-center my-5" style={{ fontSize: "40px" }}>Methods of Transportation</h3>
         <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 justify-content-center">
           {[{name: "Commuter Rail",imgSrc: "commuterrailicon.png",onClick: () => navigate("/cmlines"), color: "#84246c"},{name: "Subway",imgSrc: "subwayicon.png",onClick: () => navigate("/subwaylines"),color: "#4c4c5c"},{name: "Bus",imgSrc: "busicon.png",onClick: () => navigate("/buslines"),color: "#fac32c"},{name: "Ferry",imgSrc: "ferryicon.png",onClick: () => navigate("/ferrylines"),color: "#058cac"},].map((transportation, index) => (
             <div className="col" key={index} style={{ width: "330px" }}>
-              <div className="card" style={{ height: "375px" }}>
+              <div className="card" style={{ height: "280px" }}>
                 <button
                   className="btn"
                   onClick={transportation.onClick}
@@ -48,7 +48,7 @@ const HomePage = () => {
                     src={transportation.imgSrc}
                     alt={transportation.name}
                     className="card-img-top"
-                    style={{ width: "100%", height: "75%" }}
+                    style={{ width: "98%", height: "95%" }}
                   />
                 </button>
               </div>
