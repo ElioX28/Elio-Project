@@ -67,7 +67,7 @@ function Lines() {
     padding: '10px',
     margin: '5px',
     fontSize: '1em',
-    backgroundColor: '#fff8f2',
+    backgroundColor: 'white',
     color: 'black',
     border: 'white',
     borderRadius: '5px',
@@ -78,14 +78,14 @@ function Lines() {
     margin: '5px',
     padding: '10px',
     fontSize: '20px',
-    backgroundColor: 'lightblue',
-    border: '1px solid darkblue',
+    backgroundColor: '#ffffff',
+    border: '3px #84246c solid',
     borderRadius: '5px',
   }
 
   return (
     <div>
-      <h1>MBTA Commuter Rail Lines and Alerts</h1>
+<h1 className="text-center">MBTA Commuter Rail Lines and Alerts</h1>
 
       <div style={{ display: 'flex' }}>
         <div style={{ flex: 1 }}>

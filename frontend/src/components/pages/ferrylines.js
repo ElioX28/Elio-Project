@@ -67,7 +67,7 @@ useEffect(() => {
     padding: '10px',
     margin: '5px',
     fontSize: '1em',
-    backgroundColor: '#fff8f2',
+    backgroundColor: 'white',
     color: 'black',
     border: 'white',
     borderRadius: '5px',
@@ -78,14 +78,14 @@ useEffect(() => {
     margin: '5px',
     padding: '10px',
     fontSize: '20px',
-    backgroundColor: 'lightblue',
-    border: '1px solid darkblue',
+    backgroundColor: 'white',
+    border: '1px solid #058cac',
     borderRadius: '5px',
   }
 
   return (
     <div>
-    <h1>MBTA Ferry Routes</h1>
+    <h1 className="text-center">MBTA Ferry Routes and Alerts</h1>
 
     <div style={{ display: 'flex' }}>
       <div style={{ flex: 1 }}>

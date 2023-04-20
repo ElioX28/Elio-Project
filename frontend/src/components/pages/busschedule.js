@@ -58,7 +58,7 @@ useEffect(() => {
     .slice(0, 50);
 
     return (
-      <div style={{backgroundColor: '#5B4EB9', color: 'white', height: '1500px', overflowY: 'scroll'}}>
+      <div style={{backgroundColor: '#b38b1f', color: 'white', height: '1500px', overflowY: 'scroll'}}>
         <h1>{bus} Line Schedule</h1>
         <div style={{marginBottom: '20px'}}>
           <span style={{marginRight: '10px'}}>Direction:</span>
@@ -68,7 +68,7 @@ useEffect(() => {
           </select>
         </div>
         {arrivals.map(schedule => (
-          <Card key={schedule.id} style={{backgroundColor: '#2C2B50', color: 'white'}}>
+          <Card key={schedule.id} style={{backgroundColor: '#e6b328', color: 'white'}}>
             <Card.Body>
               <Card.Title>{getStationName(schedule)}</Card.Title>
               <Card.Text>

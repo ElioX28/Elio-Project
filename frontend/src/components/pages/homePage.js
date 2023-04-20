@@ -37,7 +37,7 @@ const HomePage = () => {
         <h3 className="text-center my-5">Methods of Transportation</h3>
         <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 justify-content-center">
           {[{name: "Commuter Rail",imgSrc: "commuterrailicon.png",onClick: () => navigate("/cmlines"), color: "#84246c"},{name: "Subway",imgSrc: "subwayicon.png",onClick: () => navigate("/subwaylines"),color: "#4c4c5c"},{name: "Bus",imgSrc: "busicon.png",onClick: () => navigate("/buslines"),color: "#fac32c"},{name: "Ferry",imgSrc: "ferryicon.png",onClick: () => navigate("/ferrylines"),color: "#058cac"},].map((transportation, index) => (
-            <div className="col" key={index} style={{ width: "325px" }}>
+            <div className="col" key={index} style={{ width: "330px" }}>
               <div className="card" style={{ height: "375px" }}>
                 <button
                   className="btn"
@@ -55,37 +55,6 @@ const HomePage = () => {
             </div>
           ))}
         </div>
-        <div className="my-5">
-          <h3 className="text-center">Alerts</h3>
-          {alerts.map((alert, index) => (
-            <Card
-              key={index}
-              body
-              outline
-              color="success"
-              className="mx-1 my-2"
-              style={{ width: "30rem" }}
-            >
-              <div className="alert alert-info">
-                <Card.Body>
-                  <Card.Title>Alert</Card.Title>
-                  <Card.Text>
-                    {alert.attributes.header + alert.attributes.description}
-                  </Card.Text>
-                  <Card.Text>
-                    Time:{" "}
-                    {new Date(alert.attributes.updated_at).toLocaleString()}
-                  </Card.Text>
-                </Card.Body>
-              </div>
-            </Card>
-          ))}
-        </div>
-      </div>
-      <div className="d-flex justify-content-center my-5">
-        <button className="btn btn-danger" onClick={handleClick}>
-          Log Out
-        </button>
       </div>
     </>
   );

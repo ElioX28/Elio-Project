@@ -58,7 +58,7 @@ function CommuterRailSchedule() {
     .slice(0, 50);
 
   return (
-    <div style={{backgroundColor: '#5B4EB9', color: 'white'}}>
+    <div style={{backgroundColor: '#5c194c', color: 'white'}}>
     <h1>{id.substring(3)} Line Schedule</h1>
       <div style={{marginBottom: '20px'}}>
         <span style={{marginRight: '10px'}}>Direction:</span>
@@ -68,7 +68,7 @@ function CommuterRailSchedule() {
         </select>
       </div>
       {arrivals.map(schedule => (
-        <Card key={schedule.id} style={{backgroundColor: '#2C2B50', color: 'white'}}>
+        <Card key={schedule.id} style={{backgroundColor: '#84246c', color: 'white'}}>
           <Card.Body>
             <Card.Title>{getStationName(schedule)}</Card.Title>
             <Card.Text>
