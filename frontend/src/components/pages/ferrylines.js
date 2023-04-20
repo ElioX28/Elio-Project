@@ -48,12 +48,12 @@ useEffect(() => {
 
   const buttonStyle = {
     display: 'inline-block',
-    height: '100px',
-    width: '300px',
+    height: '200px',
+    width: '400px',
     padding: '10px',
     margin: '5px',
-    fontSize: '21px',
-    backgroundColor: 'tan',
+    fontSize: '30px',
+    backgroundColor: '#058cac',
     color: 'white',
     border: 'none',
     borderRadius: '5px',
@@ -62,8 +62,8 @@ useEffect(() => {
 
   const alertBoxStyle = {
     display: 'inline-block',
-    height: '600px',
-    width: '650px',
+    height: '750px',
+    width: '800px',
     padding: '10px',
     margin: '5px',
     fontSize: '1em',

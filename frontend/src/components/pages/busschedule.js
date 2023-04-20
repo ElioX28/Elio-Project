@@ -5,20 +5,32 @@ import { useParams, useNavigate } from 'react-router-dom'
 
 function Busschedule() {
   const [scheduleData, setScheduleData] = useState([]);
+  const [stopData, setStopData] = useState([]);
   const { bus } = useParams();
+  const [direction, setDirection] = useState('inbound');
 
-  useEffect(() => {
+useEffect(() => {
     async function fetchSchedule() {
       try {
-        const response = await axios.get(`https://api-v3.mbta.com/schedules?filter[type]${bus ? `=${bus}` : ''}`);
+        const response = await axios.get(`https://api-v3.mbta.com/schedules?filter[route]${bus ? `=${bus}` : ''}&filter[direction_id]=${direction === 'inbound' ? 0 : 1}`);
         setScheduleData(response.data.data);
       } catch (error) {
         console.error(error);
       }      
     }
 
+    async function fetchStops() {
+      try {
+        const response = await axios.get('https://api-v3.mbta.com/stops');
+        setStopData(response.data.data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
     fetchSchedule();
-  }, [bus]);
+    fetchStops();
+  }, [bus, direction]);
 
   const convertToEST = (timeString) => {
     const date = new Date(timeString);
@@ -27,12 +39,9 @@ function Busschedule() {
   }
 
   const getStationName = (schedule) => {
-    const pattern = /^place-(\w+)/;
-    const match = schedule.relationships.stop.data.id.match(pattern);
-    if (match && match.length > 1) {
-      return match[1];
-    }
-    return schedule.relationships.stop.data.id;
+    const stopId = schedule.relationships.stop.data.id;
+    const stop = stopData.find(stop => stop.id === stopId);
+    return stop?.attributes?.name || stopId;
   }
 
   const now = new Date().getTime();
@@ -48,21 +57,28 @@ function Busschedule() {
     })
     .slice(0, 50);
 
-  return (
-    <div style={{backgroundColor: '#5B4EB9', color: 'white'}}>
-      <h1>{bus} Line Schedule</h1>
-      {arrivals.map(schedule => (
-        <Card key={schedule.id} style={{backgroundColor: '#2C2B50', color: 'white'}}>
-          <Card.Body>
-            <Card.Title>{getStationName(schedule)}</Card.Title>
-            <Card.Text>
-              <p>Arrival Time: {convertToEST(schedule.attributes.arrival_time)}</p>
-            </Card.Text>
-          </Card.Body>
-        </Card>
-      ))}
-    </div>
-  );
+    return (
+      <div style={{backgroundColor: '#5B4EB9', color: 'white', height: '1500px', overflowY: 'scroll'}}>
+        <h1>{bus} Line Schedule</h1>
+        <div style={{marginBottom: '20px'}}>
+          <span style={{marginRight: '10px'}}>Direction:</span>
+          <select value={direction} onChange={(e) => setDirection(e.target.value)}>
+            <option value="inbound">Inbound</option>
+            <option value="outbound">Outbound</option>
+          </select>
+        </div>
+        {arrivals.map(schedule => (
+          <Card key={schedule.id} style={{backgroundColor: '#2C2B50', color: 'white'}}>
+            <Card.Body>
+              <Card.Title>{getStationName(schedule)}</Card.Title>
+              <Card.Text>
+                <p>Arrival Time: {convertToEST(schedule.attributes.arrival_time)}</p>
+              </Card.Text>
+            </Card.Body>
+          </Card>
+        ))}
+      </div>
+    );
 }
 
 

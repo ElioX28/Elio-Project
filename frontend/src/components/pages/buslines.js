@@ -17,17 +17,22 @@ function BusLines() {
     return navigate('/')
 }
 
-  useEffect(() => {
-    async function fetchData() {
-      const result = await axios(
-        'https://api-v3.mbta.com/lines?page%5Boffset%5D=5&page%5Blimit%5D=2&sort=sort_order',
-        
-      );
-      setBusLines(result.data.data);
-      setUser(getUserInfo())
-    }
-    fetchData();
-  }, []);
+useEffect(() => {
+  axios
+    .get('https://api-v3.mbta.com/routes', {
+      params: {
+        filter: {
+          type: 3,
+        },
+      },
+    })
+    .then((response) => {
+      setBusLines(response.data.data.slice(0, 8));
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}, []);
 
   useEffect(() => {
     async function fetchData() {
@@ -41,12 +46,12 @@ function BusLines() {
 
   const buttonStyle = {
     display: 'inline-block',
-    height: '100px',
-    width: '300px',
+    height: '175px',
+    width: '400px',
     padding: '10px',
     margin: '5px',
-    fontSize: '21px',
-    backgroundColor: 'tan',
+    fontSize: '30px',
+    backgroundColor: '#fac32c',
     color: 'white',
     border: 'none',
     borderRadius: '5px',
@@ -55,8 +60,8 @@ function BusLines() {
 
   const alertBoxStyle = {
     display: 'inline-block',
-    height: '600px',
-    width: '650px',
+    height: '750px',
+    width: '800px',
     padding: '10px',
     margin: '5px',
     fontSize: '1em',

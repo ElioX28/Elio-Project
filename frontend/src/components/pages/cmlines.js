@@ -48,12 +48,12 @@ function Lines() {
 
   const buttonStyle = {
     display: 'inline-block',
-    height: '100px',
-    width: '300px',
+    height: '150px',
+    width: '400px',
     padding: '10px',
     margin: '5px',
-    fontSize: '21px',
-    backgroundColor: 'tan',
+    fontSize: '25px',
+    backgroundColor: '#84246c',
     color: 'white',
     border: 'none',
     borderRadius: '5px',
@@ -62,8 +62,8 @@ function Lines() {
 
   const alertBoxStyle = {
     display: 'inline-block',
-    height: '600px',
-    width: '650px',
+    height: '750px',
+    width: '800px',
     padding: '10px',
     margin: '5px',
     fontSize: '1em',
@@ -85,7 +85,7 @@ function Lines() {
 
   return (
     <div>
-      <h1>MBTA Commuter Rail Lines</h1>
+      <h1>MBTA Commuter Rail Lines and Alerts</h1>
 
       <div style={{ display: 'flex' }}>
         <div style={{ flex: 1 }}>
