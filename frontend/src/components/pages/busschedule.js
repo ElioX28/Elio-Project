@@ -59,7 +59,7 @@ useEffect(() => {
 
     return (
       <div style={{backgroundColor: '#b38b1f', color: 'white', height: '1500px', overflowY: 'scroll'}}>
-        <h1>{bus} Line Schedule</h1>
+        <h1>Bus {bus} Schedule</h1>
         <div style={{marginBottom: '20px'}}>
           <span style={{marginRight: '10px'}}>Direction:</span>
           <select value={direction} onChange={(e) => setDirection(e.target.value)}>

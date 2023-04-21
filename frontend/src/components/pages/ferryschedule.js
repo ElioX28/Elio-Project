@@ -50,7 +50,7 @@ function Ferryschedule() {
 
   return (
     <div style={{backgroundColor: '#007288', color: 'white'}}>
-    <h1>{ferry.substring(5)} Line Schedule</h1>
+    <h1>{ferry.substring(5)} Ferry Schedule</h1>
       {arrivals.map(schedule => (
         <Card key={schedule.id} style={{backgroundColor: '#008eaa', color: 'white'}}>
           <Card.Body>

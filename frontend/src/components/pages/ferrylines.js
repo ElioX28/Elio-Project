@@ -22,7 +22,7 @@ useEffect(() => {
     .get('https://api-v3.mbta.com/routes', {
       params: {
         filter: {
-          type: 4, // type 0 represents subway routes
+          type: 4, 
 
         },
       },

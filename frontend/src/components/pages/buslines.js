@@ -27,7 +27,7 @@ useEffect(() => {
       },
     })
     .then((response) => {
-      setBusLines(response.data.data.slice(0, 8));
+      setBusLines(response.data.data);
     })
     .catch((error) => {
       console.log(error);
@@ -46,11 +46,11 @@ useEffect(() => {
 
   const buttonStyle = {
     display: 'inline-block',
-    height: '175px',
-    width: '400px',
+    height: '70px',
+    width: '100px',
     padding: '10px',
     margin: '5px',
-    fontSize: '30px',
+    fontSize: '32px',
     backgroundColor: '#fac32c',
     color: 'white',
     border: 'none',
@@ -89,7 +89,7 @@ useEffect(() => {
         <div style={{ flex: 1 }}>
           {buslines.map((line) => (
             <button key={line.id} style={buttonStyle} onClick={ () => navigate(`/buslines/${line.id}`) }>
-              {line.attributes.long_name}
+              {line.attributes.short_name}
             </button>
           ))}
         </div>

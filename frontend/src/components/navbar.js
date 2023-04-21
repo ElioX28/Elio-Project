@@ -2,30 +2,36 @@ import React, { useEffect, useState } from "react";
 import getUserInfo from '../utilities/decodeJwt';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
-import ReactNavbar from 'react-bootstrap/Navbar';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 
-export default function Navbar() {
+export default function NavigationBar() {
   const [user, setUser] = useState({})
 
   useEffect(() => {
     setUser(getUserInfo())
   }, [])
-  
+
   return (
-    <ReactNavbar bg="dark" variant="dark">
+    <Navbar bg="dark" variant="dark" expand="lg">
       <Container>
-        <Nav className="me-auto align-items-center">
-          <Nav.Link href="/" style={{ fontSize: "22px" }}>Start</Nav.Link>
-          <Nav.Link href="/home" style={{ fontSize: "22px" }}>Scheduling</Nav.Link>
-          <Nav.Link href="/cmlines" style={{ fontSize: "17px" }}>Commuter Rail</Nav.Link>
-          <Nav.Link href="/subwaylines" style={{ fontSize: "17px" }}>Subway</Nav.Link>
-          <Nav.Link href="/buslines" style={{ fontSize: "17px" }}>Bus</Nav.Link>
-          <Nav.Link href="/ferrylines" style={{ fontSize: "17px" }}>Ferry</Nav.Link>
-          <Nav.Link href="/map" style={{ fontSize: "22px" }}>Maps</Nav.Link>
-          <Nav.Link href="/addComment"style={{ fontSize: "22px" }}>Comment</Nav.Link>
-          <Nav.Link href="/privateUserProfile" style={{ fontSize: "22px" }}>Profile</Nav.Link>
-        </Nav>
+        <Navbar.Brand href="/" style={{ fontSize: "22px" }}>Start</Navbar.Brand>
+        <Navbar.Toggle aria-controls="navbar-nav" />
+        <Navbar.Collapse id="navbar-nav">
+          <Nav className="me-auto align-items-center">
+            <Nav.Link href="/home" style={{ fontSize: "22px" }}>Home</Nav.Link>
+            <NavDropdown title="Schedule" style={{ fontSize: "22px" }} id="basic-nav-dropdown">
+              <NavDropdown.Item href="/cmlines">Commuter Rail</NavDropdown.Item>
+              <NavDropdown.Item href="/subwaylines">Subway</NavDropdown.Item>
+              <NavDropdown.Item href="/buslines">Bus</NavDropdown.Item>
+              <NavDropdown.Item href="/ferrylines">Ferry</NavDropdown.Item>
+            </NavDropdown>
+            <Nav.Link href="/map" style={{ fontSize: "22px" }}>Maps</Nav.Link>
+            <Nav.Link href="/addComment" style={{ fontSize: "22px" }}>Comment</Nav.Link>
+            <Nav.Link href="/privateUserProfile" style={{ fontSize: "22px" }}>Profile</Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
       </Container>
-    </ReactNavbar>
+    </Navbar>
   );
 }
