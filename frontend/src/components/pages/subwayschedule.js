@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom'
 function Subwayschedule() {
   const [scheduleData, setScheduleData] = useState([]);
   const [stopData, setStopData] = useState([]);
-  const { subway } = useParams();
+  const { subway, color } = useParams();
   const [direction, setDirection] = useState('inbound'); // default to inbound
 
   useEffect(() => {
@@ -57,8 +57,25 @@ function Subwayschedule() {
     })
     .slice(0, 50);
 
+    function darkenColor(color, percentage) {
+      // Convert color from hex string to RGB values
+      let r = parseInt(color.substr(0, 2), 16);
+      let g = parseInt(color.substr(2, 2), 16);
+      let b = parseInt(color.substr(4, 2), 16);
+    
+      // Calculate new RGB values based on percentage
+      r = Math.round(r * (1 - percentage));
+      g = Math.round(g * (1 - percentage));
+      b = Math.round(b * (1 - percentage));
+    
+      // Convert new RGB values back to hex string
+      let newColor = '#' + r.toString(16).padStart(2, '0') + g.toString(16).padStart(2, '0') + b.toString(16).padStart(2, '0');
+    
+      return newColor;
+    }
+
     return (
-      <div style={{backgroundColor: '#333740', color: 'white', height: '1500px', overflowY: 'scroll'}}>
+      <div style={{backgroundColor: darkenColor(color, 0.3), color: 'white', height: '1500px', overflowY: 'scroll'}}>
         <h1>{subway} Line Schedule</h1>
         <div style={{marginBottom: '20px'}}>
           <span style={{marginRight: '10px'}}>Direction:</span>
@@ -68,7 +85,7 @@ function Subwayschedule() {
           </select>
         </div>
         {arrivals.map(schedule => (
-          <Card key={schedule.id} style={{backgroundColor: '#5b616b', color: 'white'}}>
+          <Card key={schedule.id} style={{backgroundColor: `#${color}`, color: 'white'}}>
             <Card.Body>
               <Card.Title>{getStationName(schedule)}</Card.Title>
               <Card.Text>

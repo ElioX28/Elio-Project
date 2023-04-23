@@ -3,7 +3,7 @@ import Card from 'react-bootstrap/Card';
 import { useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import getUserInfo from '../../utilities/decodeJwt'
-
+import convert from 'color-convert'
 
 
 function SubwayLines() {
@@ -19,22 +19,22 @@ function SubwayLines() {
 }
 
 
-useEffect(() => {
-  axios
-    .get('https://api-v3.mbta.com/routes', {
-      params: {
-        filter: {
-          type: [0,1],
+  useEffect(() => {
+    axios
+      .get('https://api-v3.mbta.com/routes', {
+        params: {
+          filter: {
+            type: [0,1],
+          },
         },
-      },
-    })
-    .then((response) => {
-      setSubwayLines(response.data.data.slice(0, 8));
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-}, []);
+      })
+      .then((response) => {
+        setSubwayLines(response.data.data.slice(0, 8));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
 
   useEffect(() => {
@@ -55,7 +55,6 @@ useEffect(() => {
     padding: '10px',
     margin: '5px',
     fontSize: '30px',
-    backgroundColor: '#4c4c5c',
     color: 'white',
     border: 'none',
     borderRadius: '5px',
@@ -88,16 +87,24 @@ useEffect(() => {
   return (
     <div>
       <h1 className="text-center">MBTA Subway Lines and Alerts</h1>
-
+  
       <div style={{ display: 'flex' }}>
         <div style={{ flex: 1 }}>
           {subwaylines.map((line) => (
-            <button key={line.id} style={buttonStyle} onClick={ () => navigate(`/subwaylines/${line.id}`) }>
+            <button 
+              key={line.id} 
+              style={{
+                ...buttonStyle, 
+                backgroundColor: `#${line.attributes.color}`,
+                
+              }} 
+              onClick={() => navigate(`/subwaylines/${line.id}/${line.attributes.color}`)}
+            >
               {line.attributes.long_name}
             </button>
           ))}
         </div>
-
+  
         <div style={{ flex: 1 }}>
           <div style={alertBoxStyle}>
             {alerts.length > 0 ? (
@@ -117,6 +124,7 @@ useEffect(() => {
       </div>
     </div>
   );
+  
 }
 
 export default SubwayLines;
