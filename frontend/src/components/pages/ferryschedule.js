@@ -5,7 +5,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 
 function Ferryschedule() {
   const [scheduleData, setScheduleData] = useState([]);
-  const { ferry } = useParams();
+  const { ferry, name } = useParams();
 
   useEffect(() => {
     async function fetchSchedule() {
@@ -48,21 +48,24 @@ function Ferryschedule() {
     })
     .slice(0, 50);
 
-  return (
-    <div style={{backgroundColor: '#007288', color: 'white'}}>
-    <h1>{ferry.substring(5)} Ferry Schedule</h1>
-      {arrivals.map(schedule => (
-        <Card key={schedule.id} style={{backgroundColor: '#008eaa', color: 'white'}}>
-          <Card.Body>
-            <Card.Title>{getStationName(schedule).substring(5)}</Card.Title>
-            <Card.Text>
-              <p>Arrival Time: {convertToEST(schedule.attributes.arrival_time)}</p>
-            </Card.Text>
-          </Card.Body>
-        </Card>
-      ))}
-    </div>
-  );
+    return (
+      <div style={{backgroundColor: '#007288', color: 'white'}}>
+        <h1>{name} Schedule</h1>
+        {arrivals.length > 0 ?
+          arrivals.map(schedule => (
+            <Card key={schedule.id} style={{backgroundColor: '#008eaa', color: 'white'}}>
+              <Card.Body>
+                <Card.Title>{getStationName(schedule).substring(5)}</Card.Title>
+                <Card.Text>
+                  <p>Arrival Time: {convertToEST(schedule.attributes.arrival_time)}</p>
+                </Card.Text>
+              </Card.Body>
+            </Card>
+          )) :
+          <p style={{ fontSize: '24px' }}>No arrival times for the rest of the day.</p>
+        }
+      </div>
+    );
 }
 
 

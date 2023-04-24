@@ -6,7 +6,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 function Busschedule() {
   const [scheduleData, setScheduleData] = useState([]);
   const [stopData, setStopData] = useState([]);
-  const { bus } = useParams();
+  const { bus, name } = useParams();
   const [direction, setDirection] = useState('inbound');
 
 useEffect(() => {
@@ -59,7 +59,7 @@ useEffect(() => {
 
     return (
       <div style={{backgroundColor: '#b38b1f', color: 'white', height: '1500px', overflowY: 'scroll'}}>
-        <h1>Bus {bus} Schedule</h1>
+        <h1>Bus {bus} Schedule ({name})</h1>
         <div style={{marginBottom: '20px'}}>
           <span style={{marginRight: '10px'}}>Direction:</span>
           <select value={direction} onChange={(e) => setDirection(e.target.value)}>

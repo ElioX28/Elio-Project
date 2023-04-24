@@ -51,8 +51,8 @@ const App = () => {
           <Route exact path="/buslines" element={<BusLines />} />
           <Route exact path="/ferrylines" element={<FerryLines />} />
           <Route exact path="/subwaylines/:subway/:color" element={<Subwayschedule  />} />
-          <Route exact path="/buslines/:bus" element={<Busschedule  />} />
-          <Route exact path="/ferrylines/:ferry" element={<Ferryschedule  />} />
+          <Route exact path="/buslines/:bus/:name" element={<Busschedule  />} />
+          <Route exact path="/ferrylines/:ferry/:name" element={<Ferryschedule  />} />
           <Route path="/privateUserProfile" element={<PrivateUserProfile />} />
           <Route path="/addComment" element={<AddCommentPage />} />
           <Route path="/map" element={<Map />} />    
