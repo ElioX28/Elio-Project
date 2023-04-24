@@ -8,6 +8,7 @@ const PrivateUserProfile = () => {
   const [showModal, setShowModal] = useState(false);
   const [user, setUser] = useState(null);
   const [biography, setBiography] = useState("");
+  const [favorites, setFavorites] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -38,58 +39,76 @@ const PrivateUserProfile = () => {
       });
   };
 
-  if (!user) {
-    return <div><h4>Log in to view this page.</h4></div>;
-  }
+  const handleAddFavorite = (item) => {
+    setFavorites([...favorites, item]);
+  };
 
   return (
     <div className="container">
-      <div className="row">
-        <div className="col-md-8 text-center">
-          <h1>{user.username}</h1>
+      {user ? (
+        <div className="row">
+          <div className="col-md-8 text-center">
+            <h1>{user.username}</h1>
+          </div>
+          <div className="col-md-4 text-end">
+            <Button className="me-2" onClick={() => setShowModal(true)}>
+              Log Out
+            </Button>
+            <Modal
+              show={showModal}
+              onHide={() => setShowModal(false)}
+              backdrop="static"
+              keyboard={false}
+            >
+              <Modal.Header closeButton>
+                <Modal.Title>Log Out</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>Are you sure you want to Log Out?</Modal.Body>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={() => setShowModal(false)}>
+                  Close
+                </Button>
+                <Button variant="primary" onClick={handleLogout}>
+                  Yes
+                </Button>
+              </Modal.Footer>
+            </Modal>
+          </div>
+          <div className="col-md-8 text-center">
+            <textarea
+              rows="5"
+              className="form-control"
+              style={{ maxWidth: "300px" }}
+              placeholder="Enter your biography"
+              value={biography}
+              onChange={(e) => setBiography(e.target.value)}
+            />
+            <button
+              type="button"
+              className="btn btn-primary mt-2"
+              onClick={handleSaveBiography}
+            >
+              Save
+            </button>
+            <hr />
+            <h2>Favorite Lines</h2>
+            {favorites.map((item, index) => (
+              <div key={index}>{item}</div>
+            ))}
+            <button
+              type="button"
+              className="btn btn-primary mt-2"
+              onClick={() => handleAddFavorite("Favorite item")}
+            >
+              Add to Favorites
+            </button>
+          </div>
         </div>
-        <div className="col-md-4 text-end">
-          <Button className="me-2" onClick={() => setShowModal(true)}>
-            Log Out
-          </Button>
-          <Modal
-            show={showModal}
-            onHide={() => setShowModal(false)}
-            backdrop="static"
-            keyboard={false}
-          >
-            <Modal.Header closeButton>
-              <Modal.Title>Log Out</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>Are you sure you want to Log Out?</Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={() => setShowModal(false)}>
-                Close
-              </Button>
-              <Button variant="primary" onClick={handleLogout}>
-                Yes
-              </Button>
-            </Modal.Footer>
-          </Modal>
+      ) : (
+        <div>
+          <h4>Log in to view this page.</h4>
         </div>
-        <div className="col-md-8 text-center">
-          <textarea
-            rows="5"
-            className="form-control"
-            style={{ maxWidth: "300px" }}
-            placeholder="Enter your biography"
-            value={biography}
-            onChange={(e) => setBiography(e.target.value)}
-          />
-          <button
-            type="button"
-            className="btn btn-primary mt-2"
-            onClick={handleSaveBiography}
-          >
-            Save
-          </button>
-        </div>
-      </div>
+      )}
     </div>
   );
 };
