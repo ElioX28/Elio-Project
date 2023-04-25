@@ -49,21 +49,20 @@ function Ferryschedule() {
     .slice(0, 50);
 
     return (
-      <div style={{backgroundColor: '#007288', color: 'white'}}>
+      <div style={{backgroundColor: 'white', color: '#007288'}}>
         <h1>{name} Schedule</h1>
-        {arrivals.length > 0 ?
-          arrivals.map(schedule => (
-            <Card key={schedule.id} style={{backgroundColor: '#008eaa', color: 'white'}}>
+        <div style={{display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '15px'}}>
+          {arrivals.map(schedule => (
+            <Card key={schedule.id} style={{backgroundColor: '#058cac', color: 'white', width:'300px'}}>
               <Card.Body>
-                <Card.Title>{getStationName(schedule).substring(5)}</Card.Title>
+                <Card.Title>{getStationName(schedule)}</Card.Title>
                 <Card.Text>
                   <p>Arrival Time: {convertToEST(schedule.attributes.arrival_time)}</p>
                 </Card.Text>
               </Card.Body>
             </Card>
-          )) :
-          <p style={{ fontSize: '24px' }}>No arrival times for the rest of the day.</p>
-        }
+          ))}
+        </div>
       </div>
     );
 }

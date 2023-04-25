@@ -58,7 +58,7 @@ useEffect(() => {
     .slice(0, 50);
 
     return (
-      <div style={{backgroundColor: '#b38b1f', color: 'white', height: '1500px', overflowY: 'scroll'}}>
+      <div style={{backgroundColor: 'white', color: '#b38b1f'}}>
         <h1>Bus {bus} Schedule ({name})</h1>
         <div style={{marginBottom: '20px'}}>
           <span style={{marginRight: '10px'}}>Direction:</span>
@@ -67,16 +67,18 @@ useEffect(() => {
             <option value="outbound">Outbound</option>
           </select>
         </div>
-        {arrivals.map(schedule => (
-          <Card key={schedule.id} style={{backgroundColor: '#e6b328', color: 'white'}}>
-            <Card.Body>
-              <Card.Title>{getStationName(schedule)}</Card.Title>
-              <Card.Text>
-                <p>Arrival Time: {convertToEST(schedule.attributes.arrival_time)}</p>
-              </Card.Text>
-            </Card.Body>
-          </Card>
-        ))}
+        <div style={{display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '15px'}}>
+          {arrivals.map(schedule => (
+            <Card key={schedule.id} style={{backgroundColor: '#e6b328', color: 'white', width:'300px'}}>
+              <Card.Body>
+                <Card.Title>{getStationName(schedule)}</Card.Title>
+                <Card.Text>
+                  <p>Arrival Time: {convertToEST(schedule.attributes.arrival_time)}</p>
+                </Card.Text>
+              </Card.Body>
+            </Card>
+          ))}
+        </div>
       </div>
     );
 }

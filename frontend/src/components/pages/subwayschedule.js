@@ -75,7 +75,7 @@ function Subwayschedule() {
     }
 
     return (
-      <div style={{backgroundColor: darkenColor(color, 0.3), color: 'white', height: '1500px', overflowY: 'scroll'}}>
+      <div style={{backgroundColor: 'white', color: darkenColor(color, 0.3)}}>
         <h1>{subway} Line Schedule</h1>
         <div style={{marginBottom: '20px'}}>
           <span style={{marginRight: '10px'}}>Direction:</span>
@@ -84,16 +84,18 @@ function Subwayschedule() {
             <option value="outbound">Outbound</option>
           </select>
         </div>
-        {arrivals.map(schedule => (
-          <Card key={schedule.id} style={{backgroundColor: `#${color}`, color: 'white'}}>
-            <Card.Body>
-              <Card.Title>{getStationName(schedule)}</Card.Title>
-              <Card.Text>
-                <p>Arrival Time: {convertToEST(schedule.attributes.arrival_time)}</p>
-              </Card.Text>
-            </Card.Body>
-          </Card>
-        ))}
+        <div style={{display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '15px'}}>
+          {arrivals.map(schedule => (
+            <Card key={schedule.id} style={{backgroundColor: `#${color}`, color: 'white', width:'300px'}}>
+              <Card.Body>
+                <Card.Title>{getStationName(schedule)}</Card.Title>
+                <Card.Text>
+                  <p>Arrival Time: {convertToEST(schedule.attributes.arrival_time)}</p>
+                </Card.Text>
+              </Card.Body>
+            </Card>
+          ))}
+        </div>
       </div>
     );
     
