@@ -1,0 +1,75 @@
+{
+    "stations": [
+      {
+        "id": "place-alfcl",
+        "name": "Alewife",
+        "line": "Red Line",
+        "latitude": 42.395428,
+        "longitude": -71.142483
+      },
+      {
+        "id": "place-brdwy",
+        "name": "Broadway",
+        "line": "Red Line",
+        "lat": 42.342622,
+        "lng": -71.056967
+      },
+      {
+        "id": "place-jfk",
+        "name": "JFK/UMass",
+        "line": "Red Line",
+        "lat": 42.320685,
+        "lng": -71.052391
+      },
+      {
+        "id": "place-andrw",
+        "name": "Andrew",
+        "line": "Red Line",
+        "lat": 42.330154,
+        "lng": -71.057655
+      },
+      {
+        "id": "place-pktrm",
+        "name": "Park Street",
+        "line": "Red Line",
+        "lat": 42.35639457,
+        "lng": -71.0624242
+      },
+      {
+        "id": "place-harsq",
+        "name": "Harvard Square",
+        "line": "Red Line",
+        "lat": 42.373362,
+        "lng": -71.118956
+      },
+      {
+        "id": "place-cntsq",
+        "name": "Central Square",
+        "line": "Red Line",
+        "lat": 42.365486,
+        "lng": -71.103802
+      },
+      {
+        "id": "place-knncl",
+        "name": "Kendall/MIT",
+        "line": "Red Line",
+        "lat": 42.36249079,
+        "lng": -71.08617653
+      },
+      {
+        "id": "place-chmnl",
+        "name": "Charles/MGH",
+        "line": "Red Line",
+        "lat": 42.361166,
+        "lng": -71.070628
+      },
+      {
+        "id": "place-davis",
+        "name": "Davis",
+        "line": "Red Line",
+        "lat": 42.39674,
+        "lng": -71.121815
+      }
+    ]
+  }
+  
