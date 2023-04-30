@@ -8,6 +8,8 @@ function Subwayschedule() {
   const [stopData, setStopData] = useState([]);
   const { subway, color } = useParams();
   const [direction, setDirection] = useState('inbound'); // default to inbound
+  const [searchTerm, setSearchTerm] = useState('');
+
 
   useEffect(() => {
     async function fetchSchedule() {
@@ -45,7 +47,7 @@ function Subwayschedule() {
   }
 
   const now = new Date().getTime();
-  const arrivals = scheduleData
+  const filteredArrivals = scheduleData
     .filter(schedule => {
       const arrivalTime = new Date(schedule.attributes.arrival_time).getTime();
       return arrivalTime > now;
@@ -55,7 +57,11 @@ function Subwayschedule() {
       const arrivalTimeB = new Date(b.attributes.arrival_time).getTime();
       return arrivalTimeA - arrivalTimeB;
     })
-    .slice(0, 50);
+    .filter(schedule => {
+      const stationName = getStationName(schedule).toLowerCase();
+      return stationName.includes(searchTerm.toLowerCase());
+    })
+    .slice(0, 75);
 
     function darkenColor(color, percentage) {
       // Convert color from hex string to RGB values
@@ -83,9 +89,11 @@ function Subwayschedule() {
             <option value="inbound">Inbound</option>
             <option value="outbound">Outbound</option>
           </select>
+          <span style={{marginLeft: '10px'}}>Search for a Stop:</span>
+          <input type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} style={{marginLeft: '10px'}} />
         </div>
         <div style={{display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '15px'}}>
-          {arrivals.map(schedule => (
+          {filteredArrivals.map(schedule => (
             <Card key={schedule.id} style={{backgroundColor: `#${color}`, color: 'white', width:'300px'}}>
               <Card.Body>
                 <Card.Title>{getStationName(schedule)}</Card.Title>
@@ -98,6 +106,7 @@ function Subwayschedule() {
         </div>
       </div>
     );
+  
     
 }
 

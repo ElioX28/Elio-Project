@@ -8,6 +8,8 @@ function Busschedule() {
   const [stopData, setStopData] = useState([]);
   const { bus, name } = useParams();
   const [direction, setDirection] = useState('inbound');
+  const [searchTerm, setSearchTerm] = useState('');
+
 
 useEffect(() => {
     async function fetchSchedule() {
@@ -45,17 +47,21 @@ useEffect(() => {
   }
 
   const now = new Date().getTime();
-  const arrivals = scheduleData
-    .filter(schedule => {
-      const arrivalTime = new Date(schedule.attributes.arrival_time).getTime();
-      return arrivalTime > now;
-    })
-    .sort((a, b) => {
-      const arrivalTimeA = new Date(a.attributes.arrival_time).getTime();
-      const arrivalTimeB = new Date(b.attributes.arrival_time).getTime();
-      return arrivalTimeA - arrivalTimeB;
-    })
-    .slice(0, 50);
+  const filteredArrivals = scheduleData
+  .filter(schedule => {
+    const arrivalTime = new Date(schedule.attributes.arrival_time).getTime();
+    return arrivalTime > now;
+  })
+  .sort((a, b) => {
+    const arrivalTimeA = new Date(a.attributes.arrival_time).getTime();
+    const arrivalTimeB = new Date(b.attributes.arrival_time).getTime();
+    return arrivalTimeA - arrivalTimeB;
+  })
+  .filter(schedule => {
+    const stationName = getStationName(schedule).toLowerCase();
+    return stationName.includes(searchTerm.toLowerCase());
+  })
+  .slice(0, 75);
 
     return (
       <div style={{backgroundColor: 'white', color: '#b38b1f'}}>
@@ -66,9 +72,11 @@ useEffect(() => {
             <option value="inbound">Inbound</option>
             <option value="outbound">Outbound</option>
           </select>
+          <span style={{marginLeft: '10px'}}>Search for a Stop:</span>
+          <input type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} style={{marginLeft: '10px'}} />
         </div>
         <div style={{display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '15px'}}>
-          {arrivals.map(schedule => (
+          {filteredArrivals.map(schedule => (
             <Card key={schedule.id} style={{backgroundColor: '#e6b328', color: 'white', width:'300px'}}>
               <Card.Body>
                 <Card.Title>{getStationName(schedule)}</Card.Title>
