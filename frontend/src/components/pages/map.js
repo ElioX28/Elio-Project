@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import stationsData from '/Users/kozetadimo/source/repos/Elio-Project/frontend/src/stations.json';
+import stationsgData from '/Users/kozetadimo/source/repos/Elio-Project/frontend/src/greenline.json'
+import L from 'leaflet';
 
 export default function Map() {
   const [stations, setStations] = useState((stationsData).stations);
