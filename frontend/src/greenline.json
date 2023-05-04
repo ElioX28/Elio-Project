@@ -1,0 +1,103 @@
+{
+    "stationsg":
+    [
+    {
+    "id": "place-lech",
+    "name": "Lechmere",
+    "line": "Green Line",
+    "latitude": 42.370772,
+    "longitude": -71.076536
+    },
+    {
+        "id": "place-science",
+        "name": "Science Park",
+        "line": "Green Line",
+        "latitude": 42.366664,
+        "longitude": -71.067666
+      },
+      {
+        "id": "place-north",
+        "name": "North Station",
+        "line": "Green Line",
+        "latitude": 42.365577,
+        "longitude": -71.06129
+      },
+      {
+        "id": "place-haecl",
+        "name": "Haymarket",
+        "line": "Green Line",
+        "latitude": 42.363021,
+        "longitude": -71.05829
+      },
+      {
+        "id": "place-gover",
+        "name": "Government Center",
+        "line": "Green Line",
+        "latitude": 42.359705,
+        "longitude": -71.05921499999999
+      },
+      {
+        "id": "place-pktrm",
+        "name": "Park Street",
+        "line": "Green Line",
+        "latitude": 42.35639457,
+        "longitude": -71.0624242
+      },
+      {
+        "id": "place-boyls",
+        "name": "Boylston",
+        "line": "Green Line",
+        "latitude": 42.352312,
+        "longitude": -71.064262
+      },
+      {
+        "id": "place-armnl",
+        "name": "Arlington",
+        "line": "Green Line",
+        "latitude": 42.351902,
+        "longitude": -71.070893
+      },
+      {
+        "id": "place-coecl",
+        "name": "Copley",
+        "line": "Green Line",
+        "latitude": 42.349974,
+        "longitude": -71.077447
+      },
+      {
+        "id": "place-hymnl",
+        "name": "Hynes Convention Center",
+        "line": "Green Line",
+        "latitude": 42.347888,
+        "longitude": -71.087903
+      },
+      {
+        "id": "place-kencl",
+        "name": "Kenmore",
+        "line": "Green Line",
+        "latitude": 42.348949,
+        "longitude": -71.095169
+      },
+      {
+        "id": "place-bland",
+        "name": "Blandford Street",
+        "line": "Green Line",
+        "latitude": 42.349293,
+        "longitude": -71.100258
+      },
+      {
+        "id": "place-bucen",
+        "name": "Boston University Central",
+        "line": "Green Line",
+        "latitude": 42.350082,
+        "longitude": -71.106865
+      },
+      {
+        "id": "place-buest",
+        "name": "Boston University East",
+        "line": "Green Line",
+        "latitude": 42.349735,
+        "longitude": -71.117065
+      }
+    ]
+}
