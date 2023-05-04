@@ -46,7 +46,7 @@ function Ferryschedule() {
       const arrivalTimeB = new Date(b.attributes.arrival_time).getTime();
       return arrivalTimeA - arrivalTimeB;
     })
-    .slice(0, 50);
+    .slice(0, 75);
 
     return (
       <div style={{backgroundColor: 'white', color: '#007288'}}>
@@ -55,7 +55,7 @@ function Ferryschedule() {
           {arrivals.map(schedule => (
             <Card key={schedule.id} style={{backgroundColor: '#058cac', color: 'white', width:'300px'}}>
               <Card.Body>
-                <Card.Title>{getStationName(schedule)}</Card.Title>
+                <Card.Title>{getStationName(schedule).substring(5)}</Card.Title>
                 <Card.Text>
                   <p>Arrival Time: {convertToEST(schedule.attributes.arrival_time)}</p>
                 </Card.Text>

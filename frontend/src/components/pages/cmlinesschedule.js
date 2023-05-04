@@ -8,6 +8,8 @@ function CommuterRailSchedule() {
   const [stopData, setStopData] = useState([]);
   const { id } = useParams();
   const [direction, setDirection] = useState('inbound'); // default to inbound
+  const [searchTerm, setSearchTerm] = useState('');
+
 
   useEffect(() => {
     async function fetchSchedule() {
@@ -45,7 +47,7 @@ function CommuterRailSchedule() {
   }
 
   const now = new Date().getTime();
-  const arrivals = scheduleData
+  const filteredArrivals = scheduleData
     .filter(schedule => {
       const arrivalTime = new Date(schedule.attributes.arrival_time).getTime();
       return arrivalTime > now;
@@ -55,20 +57,26 @@ function CommuterRailSchedule() {
       const arrivalTimeB = new Date(b.attributes.arrival_time).getTime();
       return arrivalTimeA - arrivalTimeB;
     })
-    .slice(0, 50);
+    .filter(schedule => {
+      const stationName = getStationName(schedule).toLowerCase();
+      return stationName.includes(searchTerm.toLowerCase());
+    })
+    .slice(0, 75);
 
   return (
     <div style={{backgroundColor: 'white', color: '#5c194c'}}>
     <h1>{id.substring(3)} Line Schedule</h1>
-      <div style={{marginBottom: '20px'}}>
-        <span style={{marginRight: '10px'}}>Direction:</span>
-        <select value={direction} onChange={(e) => setDirection(e.target.value)}>
-          <option value="inbound">Inbound</option>
-          <option value="outbound">Outbound</option>
-        </select>
-      </div>
-      <div style={{display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '15px'}}>
-          {arrivals.map(schedule => (
+    <div style={{marginBottom: '20px'}}>
+          <span style={{marginRight: '10px'}}>Direction:</span>
+          <select value={direction} onChange={(e) => setDirection(e.target.value)}>
+            <option value="inbound">Inbound</option>
+            <option value="outbound">Outbound</option>
+          </select>
+          <span style={{marginLeft: '10px'}}>Search for a Stop:</span>
+          <input type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} style={{marginLeft: '10px'}} />
+        </div>
+        <div style={{display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '15px'}}>
+          {filteredArrivals.map(schedule => (
             <Card key={schedule.id} style={{backgroundColor: '#84246c', color: 'white', width:'300px'}}>
               <Card.Body>
                 <Card.Title>{getStationName(schedule)}</Card.Title>
